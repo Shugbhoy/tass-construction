@@ -240,12 +240,17 @@ function Card({ children, style = {} }) {
 function TabBar({ options, active, onSelect }) {
   return (
     <div style={{ display: "flex", flexWrap: "wrap", gap: 6, marginBottom: 14 }}>
-      {options.map((opt, i) => (
-        <button key={i} onClick={() => onSelect(opt.id || opt)}
-          style={{ background: active === (opt.id || opt) ? AMBER : "#1A1A1A", color: active === (opt.id || opt) ? "#111" : "#777", border: `1px solid ${active === (opt.id || opt) ? AMBER : "#E2E8F0"}`, borderRadius: 20, padding: "6px 12px", fontSize: 11, fontWeight: active === (opt.id || opt) ? 800 : 400, cursor: "pointer", fontFamily: "inherit", textTransform: "uppercase", letterSpacing: 0.3, whiteSpace: "nowrap" }}>
-          {opt.label || opt}
-        </button>
-      ))}
+      {options.map((opt, i) => {
+        const id = typeof opt === "object" ? opt.id : opt;
+        const label = typeof opt === "object" ? opt.label : opt;
+        const isActive = active === id;
+        return (
+          <button key={i} onClick={() => onSelect(id)}
+            style={{ background: isActive ? AMBER : "#fff", color: isActive ? NAVY : "#777", border: `1px solid ${isActive ? AMBER : "#E2E8F0"}`, borderRadius: 20, padding: "6px 12px", fontSize: 11, fontWeight: isActive ? 800 : 400, cursor: "pointer", fontFamily: "inherit", textTransform: "uppercase", letterSpacing: 0.3, whiteSpace: "nowrap" }}>
+            {label}
+          </button>
+        );
+      })}
     </div>
   );
 }
@@ -263,7 +268,7 @@ function SectorModule() {
     <div>
       <SectionHeader icon="🔍" title="Sector Overview" subtitle="What construction is, who the employers are, and why it is a serious career choice." />
       {items.map((item, i) => (
-        <div key={i} style={{ background: "#fff", border: `1px solid ${open === i ? AMBER : "#E2E8F0"}`, borderRadius: 10, overflow: "hidden", marginBottom: 10 }}>
+        <div key={i} style={{ background: "#fff", border: `1px solid ${open === i ? AMBER : "#E2E8F0"}`, boxShadow: "0 1px 4px rgba(0,0,0,0.04)", borderRadius: 10, overflow: "hidden", marginBottom: 10 }}>
           <button onClick={() => setOpen(open === i ? null : i)}
             style={{ width: "100%", background: "none", border: "none", padding: "13px 15px", display: "flex", justifyContent: "space-between", alignItems: "center", cursor: "pointer", fontFamily: "inherit" }}>
             <span style={{ color: NAVY, fontWeight: 700, fontSize: 14, textAlign: "left" }}>{item.title}</span>
@@ -310,8 +315,8 @@ function PathwaysModule() {
         <p style={{ color: AMBER, fontWeight: 800, fontSize: 15, margin: "0 0 10px", textTransform: "uppercase", letterSpacing: 0.5 }}>{p.trade}</p>
         <p style={{ color: "#444", fontSize: 14, lineHeight: 1.75, margin: "0 0 14px", paddingBottom: 14, borderBottom: "1px solid #E2E8F0" }}>{p.desc}</p>
         {[["SCQF Level", p.level], ["Duration", p.duration], ["Qualification", p.qual], ["Managed by", p.body], ["Entry requirements", p.entry], ["Progression", p.next]].map(([label, val], i) => (
-          <div key={i} style={{ display: "flex", gap: 12, padding: "9px 0", borderBottom: i < 5 ? "1px solid #2C2C2C" : "none" }}>
-            <span style={{ color: "#444", fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: 0.5, minWidth: 110, flexShrink: 0 }}>{label}</span>
+          <div key={i} style={{ display: "flex", gap: 12, padding: "9px 0", borderBottom: i < 5 ? "1px solid #F0F4F8" : "none" }}>
+            <span style={{ color: "#666", fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: 0.5, minWidth: 110, flexShrink: 0 }}>{label}</span>
             <span style={{ color: NAVY, fontSize: 13, lineHeight: 1.5 }}>{val}</span>
           </div>
         ))}
@@ -326,7 +331,7 @@ function PathwaysModule() {
           ["Scottish Water/utilities", "Feb–Mar", "Mar–Apr", "Aug"],
           ["Apprenticeships.Scot", "Year-round", "Varies", "Varies"],
         ].map(([employer, open, close, start], i) => (
-          <div key={i} style={{ display: "grid", gridTemplateColumns: "1.6fr 1fr 1fr 1fr", gap: 6, padding: "7px 0", borderBottom: i < 5 ? "1px solid #2C2C2C" : "none", alignItems: "center" }}>
+          <div key={i} style={{ display: "grid", gridTemplateColumns: "1.6fr 1fr 1fr 1fr", gap: 6, padding: "7px 0", borderBottom: i < 5 ? "1px solid #F0F4F8" : "none", alignItems: "center" }}>
             <span style={{ color: NAVY, fontSize: 12 }}>{employer}</span>
             <span style={{ color: TEAL, fontSize: 10, fontWeight: 700 }}>Opens: {open}</span>
             <span style={{ color: AMBER, fontSize: 10, fontWeight: 700 }}>Closes: {close}</span>
@@ -394,7 +399,7 @@ function ApplyModule() {
       <div style={{ display: "flex", gap: 6, marginBottom: 14, overflowX: "auto", paddingBottom: 4 }}>
         {steps.map((st, i) => (
           <button key={i} onClick={() => setStep(i)}
-            style={{ background: step === i ? AMBER : "#1A1A1A", color: step === i ? "#111" : "#777", border: `1px solid ${step === i ? AMBER : "#E2E8F0"}`, borderRadius: 20, padding: "6px 12px", fontSize: 11, fontWeight: step === i ? 800 : 400, cursor: "pointer", fontFamily: "inherit", whiteSpace: "nowrap", textTransform: "uppercase", letterSpacing: 0.3 }}>
+            style={{ background: step === i ? AMBER : "#fff", color: step === i ? "#111" : "#777", border: `1px solid ${step === i ? AMBER : "#E2E8F0"}`, borderRadius: 20, padding: "6px 12px", fontSize: 11, fontWeight: step === i ? 800 : 400, cursor: "pointer", fontFamily: "inherit", whiteSpace: "nowrap", textTransform: "uppercase", letterSpacing: 0.3 }}>
             {i + 1}. {st.icon}
           </button>
         ))}
@@ -416,7 +421,7 @@ function ApplyModule() {
         </div>
       )}
       <div style={{ display: "flex", gap: 10, marginTop: 8 }}>
-        {step > 0 && <button onClick={() => setStep(s => s - 1)} style={{ flex: 1, padding: 12, background: "#fff", border: "1px solid #2C2C2C", color: NAVY, borderRadius: 8, fontWeight: 700, cursor: "pointer", fontFamily: "inherit", fontSize: 14 }}>← Previous</button>}
+        {step > 0 && <button onClick={() => setStep(s => s - 1)} style={{ flex: 1, padding: 12, background: "#fff", border: "1px solid #E2E8F0", color: NAVY, borderRadius: 8, fontWeight: 700, cursor: "pointer", fontFamily: "inherit", fontSize: 14 }}>← Previous</button>}
         {step < steps.length - 1 && <button onClick={() => setStep(s => s + 1)} style={{ flex: 1, padding: 12, background: AMBER, border: "none", color: NAVY, borderRadius: 8, fontWeight: 800, cursor: "pointer", fontFamily: "inherit", fontSize: 14 }}>Next →</button>}
       </div>
     </div>
@@ -484,7 +489,7 @@ function STARModule() {
       </Card>
       <div style={{ display: "flex", gap: 6, marginBottom: 12 }}>
         {["weak","good","strong"].map(t => (
-          <button key={t} onClick={() => setTier(t)} style={{ flex: 1, padding: "8px 4px", background: tier === t ? tierCol[t] : "#1A1A1A", border: `2px solid ${tierCol[t]}`, color: tier === t ? (t === "good" ? "#111" : "#fff") : tierCol[t], borderRadius: 8, fontWeight: 700, fontSize: 11, cursor: "pointer", fontFamily: "inherit", textTransform: "uppercase" }}>
+          <button key={t} onClick={() => setTier(t)} style={{ flex: 1, padding: "8px 4px", background: tier === t ? tierCol[t] : "#fff", border: `2px solid ${tierCol[t]}`, color: tier === t ? (t === "good" ? "#111" : "#fff") : tierCol[t], borderRadius: 8, fontWeight: 700, fontSize: 11, cursor: "pointer", fontFamily: "inherit", textTransform: "uppercase" }}>
             {t === "weak" ? "✗ Weak" : t === "good" ? "◎ Good" : "✓ Strong"}
           </button>
         ))}
@@ -558,7 +563,7 @@ function TechnicalModule() {
       <div style={{ display: "flex", flexWrap: "wrap", gap: 6, marginBottom: 14 }}>
         {TRADES.map(t => (
           <button key={t.id} onClick={() => { setTrade(t.id); setState({}); }}
-            style={{ background: trade === t.id ? AMBER : "#1A1A1A", color: trade === t.id ? "#111" : "#777", border: `1px solid ${trade === t.id ? AMBER : "#E2E8F0"}`, borderRadius: 20, padding: "6px 11px", fontSize: 11, fontWeight: trade === t.id ? 800 : 400, cursor: "pointer", fontFamily: "inherit", textTransform: "uppercase", letterSpacing: 0.3 }}>
+            style={{ background: trade === t.id ? AMBER : "#fff", color: trade === t.id ? "#111" : "#777", border: `1px solid ${trade === t.id ? AMBER : "#E2E8F0"}`, borderRadius: 20, padding: "6px 11px", fontSize: 11, fontWeight: trade === t.id ? 800 : 400, cursor: "pointer", fontFamily: "inherit", textTransform: "uppercase", letterSpacing: 0.3 }}>
             {t.icon} {t.label.split(" ")[0]}
           </button>
         ))}
@@ -569,11 +574,11 @@ function TechnicalModule() {
         const answered = state[key] !== undefined;
         const correctIdx = q.opts.indexOf(q.a);
         return (
-          <div key={i} style={{ background: "#fff", border: "1px solid #2C2C2C", borderRadius: 10, padding: 15, marginBottom: 12 }}>
+          <div key={i} style={{ background: "#fff", border: "1px solid #E2E8F0", borderRadius: 10, padding: 15, marginBottom: 12, boxShadow: "0 1px 4px rgba(0,0,0,0.04)" }}>
             <p style={{ color: NAVY, fontWeight: 700, fontSize: 14, lineHeight: 1.55, margin: "0 0 12px" }}>{i + 1}. {q.q}</p>
             <div style={{ display: "flex", flexDirection: "column", gap: 7 }}>
               {q.opts.map((opt, j) => {
-                let bg = "#111", border = "1px solid #2C2C2C", col = "#777";
+                let bg = "#F8FAFC", border = "1px solid #E2E8F0", col = "#555";
                 if (answered) {
                   if (j === correctIdx) { bg = "#0A1A0A"; border = `1px solid ${GREEN}`; col = GREEN; }
                   else if (j === state[key]) { bg = "#1A0A0A"; border = `1px solid ${RUST}`; col = RUST; }
@@ -587,7 +592,7 @@ function TechnicalModule() {
               })}
             </div>
             {answered && (
-              <div style={{ marginTop: 10, background: "#EFF6FF", borderLeft: `3px solid ${TEAL}`, borderRadius: 8, padding: "9px 12px" }}>
+              <div style={{ marginTop: 10, background: "#EFF6FF", borderLeft: `3px solid ${TEAL}`, borderRadius: 8, borderRadius: 8, padding: "9px 12px" }}>
                 <p style={{ color: state[key] === correctIdx ? GREEN : RUST, fontWeight: 700, fontSize: 11, margin: "0 0 4px", textTransform: "uppercase" }}>
                   {state[key] === correctIdx ? "✅ Correct" : `✗ Incorrect — answer: ${q.a}`}
                 </p>
@@ -648,10 +653,10 @@ function CITBModule() {
           <div style={{ background: AMBER, height: 5, borderRadius: 99, width: `${(qIdx / CITB_QUESTIONS.length) * 100}%`, transition: "width 0.3s" }} />
         </div>
       </div>
-      <Card><p style={{ color: NAVY, fontWeight: 700, fontSize: 15, lineHeight: 1.55, margin: 0 }}>{q.q}</p></Card>
+      <Card style={{ boxShadow: "0 2px 8px rgba(0,0,0,0.06)" }}><p style={{ color: NAVY, fontWeight: 700, fontSize: 15, lineHeight: 1.55, margin: 0 }}>{q.q}</p></Card>
       <div style={{ display: "flex", flexDirection: "column", gap: 8, marginBottom: 12 }}>
         {q.opts.map((opt, i) => {
-          let bg = "#111", border = "1px solid #2C2C2C", col = "#777";
+          let bg = "#F8FAFC", border = "1px solid #E2E8F0", col = "#555";
           if (answered !== null) {
             if (i === q.correct) { bg = "#0A1A0A"; border = `1px solid ${GREEN}`; col = GREEN; }
             else if (i === answered) { bg = "#1A0A0A"; border = `1px solid ${RUST}`; col = RUST; }
@@ -666,7 +671,7 @@ function CITBModule() {
       </div>
       {answered !== null && (
         <>
-          <div style={{ background: answered === q.correct ? "#0A1A0A" : "#1A0A0A", border: `1px solid ${answered === q.correct ? GREEN : RUST}30`, borderRadius: 10, padding: 13, marginBottom: 12 }}>
+          <div style={{ background: answered === q.correct ? "#F0FDF4" : "#FEF2F2", border: `1px solid ${answered === q.correct ? GREEN : RUST}40`, borderRadius: 10, padding: 13, marginBottom: 12 }}>
             <p style={{ color: answered === q.correct ? GREEN : RUST, fontWeight: 700, fontSize: 12, margin: "0 0 6px", textTransform: "uppercase" }}>{answered === q.correct ? "✅ Correct" : "✗ Incorrect"}</p>
             <p style={{ color: "#444", fontSize: 13, lineHeight: 1.65, margin: 0 }}>{q.explain}</p>
           </div>
@@ -688,7 +693,7 @@ function CaseStudiesModule() {
       <div style={{ display: "flex", flexDirection: "column", gap: 8, marginBottom: 16 }}>
         {CASE_STUDIES.map((cs, i) => (
           <button key={i} onClick={() => setActive(i)}
-            style={{ background: active === i ? "#1A1A1A" : "#111", border: active === i ? `1px solid ${AMBER}` : "1px solid #2C2C2C", borderRadius: 10, padding: "11px 14px", textAlign: "left", cursor: "pointer", fontFamily: "inherit" }}>
+            style={{ background: active === i ? "#fff" : "#F8FAFC", border: active === i ? `1px solid ${AMBER}` : "1px solid #E2E8F0", borderRadius: 10, padding: "11px 14px", boxShadow: active === i ? "0 2px 8px rgba(0,0,0,0.06)" : "none", textAlign: "left", cursor: "pointer", fontFamily: "inherit" }}>
             <div style={{ display: "flex", justifyContent: "space-between" }}>
               <span style={{ color: active === i ? WARM : "#777", fontWeight: 700, fontSize: 13 }}>{cs.name}, {cs.age}</span>
               <span style={{ fontSize: 12, color: active === i ? AMBER : "#555" }}>{cs.outcomeIcon}</span>
@@ -725,7 +730,7 @@ function RoadmapModule() {
       <div style={{ display: "flex", flexDirection: "column", gap: 6, marginBottom: 14 }}>
         {ROADMAP.map((r, i) => (
           <button key={i} onClick={() => setActive(i)}
-            style={{ background: active === i ? "#1A1A1A" : "#111", border: active === i ? `1px solid ${AMBER}` : "1px solid #2C2C2C", borderRadius: 10, padding: "10px 14px", textAlign: "left", cursor: "pointer", fontFamily: "inherit", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+            style={{ background: active === i ? "#fff" : "#F8FAFC", border: active === i ? `1px solid ${AMBER}` : "1px solid #E2E8F0", borderRadius: 10, padding: "10px 14px", boxShadow: active === i ? "0 2px 8px rgba(0,0,0,0.06)" : "none", textAlign: "left", cursor: "pointer", fontFamily: "inherit", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
             <span style={{ color: active === i ? WARM : "#777", fontWeight: 700, fontSize: 13 }}>{r.phase}</span>
             <span style={{ color: active === i ? AMBER : "#555", fontSize: 11, fontWeight: 700 }}>{r.weeks}</span>
           </button>
@@ -772,7 +777,7 @@ function EDIModule() {
     <div>
       <SectionHeader icon="🤝" title="EDI and Your Rights" subtitle="Equality, inclusion and what you are legally entitled to during the recruitment process." />
       {items.map((item, i) => (
-        <div key={i} style={{ background: "#fff", border: `1px solid ${open === i ? TEAL : "#E2E8F0"}`, borderRadius: 10, overflow: "hidden", marginBottom: 10 }}>
+        <div key={i} style={{ background: "#fff", border: `1px solid ${open === i ? TEAL : "#E2E8F0"}`, borderRadius: 10, boxShadow: "0 1px 4px rgba(0,0,0,0.04)", overflow: "hidden", marginBottom: 10 }}>
           <button onClick={() => setOpen(open === i ? null : i)}
             style={{ width: "100%", background: "none", border: "none", padding: "13px 15px", display: "flex", justifyContent: "space-between", alignItems: "center", cursor: "pointer", fontFamily: "inherit" }}>
             <span style={{ color: NAVY, fontWeight: 700, fontSize: 14, textAlign: "left" }}>{item.title}</span>
@@ -874,14 +879,14 @@ function HomeModule({ setTab }) {
         <p style={{ color: "#444", fontSize: 11, margin: "0 0 4px", textTransform: "uppercase", letterSpacing: 0.5, fontWeight: 700 }}>Construction and Trades</p>
         <p style={{ color: NAVY, fontSize: 14, lineHeight: 1.65, margin: 0 }}>A full-depth preparation module for construction trade apprenticeships in Scotland. Covers all 8 trades, CITB test prep, STAR method, CV building, technical questions and real candidate stories.</p>
       </div>
-      <div style={{ background: "#F8FAFC", border: `1px solid #2C2C2C`, borderLeft: `4px solid ${TEAL}`, borderRadius: 10, padding: 14, marginBottom: 20 }}>
+      <div style={{ background: "#EFF6FF", border: `1px solid ${TEAL}30`, borderLeft: `4px solid ${TEAL}`, borderRadius: 10, padding: 14, marginBottom: 20 }}>
         <p style={{ color: TEAL, fontWeight: 800, fontSize: 12, margin: "0 0 4px", textTransform: "uppercase" }}>Start here</p>
         <p style={{ color: "#444", fontSize: 13, lineHeight: 1.65, margin: 0 }}>Read <strong style={{ color: NAVY }}>Sector Overview</strong> and <strong style={{ color: NAVY }}>Pathways</strong> first. Then build your CV and STAR answers. Use the AI Coach to practise at any stage.</p>
       </div>
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, marginBottom: 24 }}>
         {cards.map((card, i) => (
           <button key={i} onClick={() => setTab(card.id)}
-            style={{ background: "#F8FAFC", border: "1px solid #2C2C2C", borderRadius: 12, padding: "14px 12px", textAlign: "left", cursor: "pointer", fontFamily: "inherit" }}
+            style={{ background: "#fff", border: "1px solid #E2E8F0", borderRadius: 12, padding: "14px 12px", textAlign: "left", cursor: "pointer", fontFamily: "inherit" }}
             onMouseEnter={e => { e.currentTarget.style.borderColor = AMBER; }}
             onMouseLeave={e => { e.currentTarget.style.borderColor = "#E2E8F0"; }}>
             <div style={{ fontSize: 20, marginBottom: 6 }}>{card.icon}</div>
@@ -901,7 +906,7 @@ export default function TASSConstruction() {
   const [tab, setTab] = useState("home");
   const currentTab = MODULES.find(t => t.id === tab);
   return (
-    <div style={{ fontFamily: "'Segoe UI', system-ui, sans-serif", background: "#F5F7FA", minHeight: "100vh", color: NAVY }}>
+    <div style={{ fontFamily: "'Segoe UI', system-ui, sans-serif", background: "#F0F4F8", minHeight: "100vh", color: NAVY }}>
       <style>{`* { box-sizing: border-box; } ::-webkit-scrollbar { width: 4px; } ::-webkit-scrollbar-track { background: ${CONCRETE}; } ::-webkit-scrollbar-thumb { background: #D1D9E6; border-radius: 4px; } textarea:focus, button:focus { outline: 2px solid ${AMBER}; outline-offset: 2px; }`}</style>
       {tab !== "home" && (
         <div style={{ background: `linear-gradient(135deg, #0D1B3E 0%, #1A3060 100%)`, borderBottom: "none", padding: "12px 16px", display: "flex", alignItems: "center", gap: 12, position: "sticky", top: 0, zIndex: 100 }}>
