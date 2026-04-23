@@ -204,11 +204,11 @@ const ROADMAP = [
 
 function Callout({ text, type = "tip" }) {
   const s = {
-    tip:     { bg: "#1A1400", border: AMBER, col: AMBER },
-    info:    { bg: "#0D1B2E", border: TEAL,  col: TEAL  },
-    warning: { bg: "#1A0D0D", border: RUST,  col: RUST  },
-    success: { bg: "#0D1A0D", border: GREEN, col: GREEN },
-  }[type] || { bg: "#1A1400", border: AMBER, col: AMBER };
+    tip:     { bg: "#FFFBEB", border: AMBER, col: "#92400E" },
+    info:    { bg: "#EFF6FF", border: TEAL,  col: "#1A5276" },
+    warning: { bg: "#FEF2F2", border: RUST,  col: "#7F1D1D" },
+    success: { bg: "#F0FDF4", border: GREEN, col: "#14532D" },
+  }[type] || { bg: "#FFFBEB", border: AMBER, col: "#92400E" };
   return (
     <div style={{ background: s.bg, borderLeft: `4px solid ${s.border}`, borderRadius: 8, padding: "11px 13px", marginBottom: 14 }}>
       <p style={{ color: s.col, fontSize: 13, lineHeight: 1.65, margin: 0 }}>{text}</p>
@@ -399,7 +399,7 @@ function ApplyModule() {
       <div style={{ display: "flex", gap: 6, marginBottom: 14, overflowX: "auto", paddingBottom: 4 }}>
         {steps.map((st, i) => (
           <button key={i} onClick={() => setStep(i)}
-            style={{ background: step === i ? AMBER : "#fff", color: step === i ? "#111" : "#777", border: `1px solid ${step === i ? AMBER : "#E2E8F0"}`, borderRadius: 20, padding: "6px 12px", fontSize: 11, fontWeight: step === i ? 800 : 400, cursor: "pointer", fontFamily: "inherit", whiteSpace: "nowrap", textTransform: "uppercase", letterSpacing: 0.3 }}>
+            style={{ background: step === i ? AMBER : "#fff", color: step === i ? NAVY : "#666", border: `1px solid ${step === i ? AMBER : "#E2E8F0"}`, borderRadius: 20, padding: "6px 12px", fontSize: 11, fontWeight: step === i ? 800 : 400, cursor: "pointer", fontFamily: "inherit", whiteSpace: "nowrap", textTransform: "uppercase", letterSpacing: 0.3 }}>
             {i + 1}. {st.icon}
           </button>
         ))}
@@ -455,7 +455,7 @@ function CVModule() {
       {reveal === "strong" && <div style={{ background: "#F0FDF4", border: `1px solid ${GREEN}30`, borderLeft: `3px solid ${GREEN}`, borderRadius: 10, padding: 14, marginBottom: 12 }}><p style={{ color: GREEN, fontWeight: 700, fontSize: 11, textTransform: "uppercase", margin: "0 0 8px" }}>✓ Strong — specific, evidenced</p><pre style={{ color: "#333", fontSize: 13, whiteSpace: "pre-wrap", fontFamily: "inherit", margin: 0, lineHeight: 1.65 }}>{s.strong}</pre></div>}
       <Card>
         <p style={{ color: TEAL, fontWeight: 700, fontSize: 12, margin: "0 0 8px", textTransform: "uppercase" }}>✍️ Draft your {s.label.toLowerCase()}</p>
-        <textarea placeholder={`Write your ${s.label.toLowerCase()} here...`} rows={5} style={{ width: "100%", background: "#F8FAFC", border: "1px solid #2C2C2C", borderRadius: 8, padding: 12, color: NAVY, fontSize: 13, fontFamily: "inherit", resize: "vertical", boxSizing: "border-box", lineHeight: 1.65 }} />
+        <textarea placeholder={`Write your ${s.label.toLowerCase()} here...`} rows={5} style={{ width: "100%", background: "#fff", border: "1px solid #E2E8F0", borderRadius: 8, padding: 12, color: NAVY, fontSize: 13, fontFamily: "inherit", resize: "vertical", boxSizing: "border-box", lineHeight: 1.65 }} />
         <p style={{ color: "#444", fontSize: 12, marginTop: 8, marginBottom: 0 }}>💡 Paste into the AI Coach for personalised feedback.</p>
       </Card>
     </div>
@@ -467,13 +467,13 @@ function STARModule() {
   const [tier, setTier] = useState("strong");
   const ex = STAR_EXAMPLES[active];
   const tierCol = { weak: RUST, good: AMBER, strong: GREEN };
-  const tierBg  = { weak: "#1A0A0A", good: "#1A1400", strong: "#0A1A0A" };
+  const tierBg  = { weak: "#FEF2F2", good: "#FFFBEB", strong: "#F0FDF4" };
   return (
     <div>
       <SectionHeader icon="⭐" title="STAR Method" subtitle="The universal answer framework for construction apprenticeship interviews." />
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8, marginBottom: 16 }}>
         {[{ l:"S", w:"Situation", d:"Set the scene — where, when, what was happening." }, { l:"T", w:"Task", d:"What was YOUR specific responsibility?" }, { l:"A", w:"Action", d:"What did YOU do? Use 'I' not 'we'. Be specific." }, { l:"R", w:"Result", d:"What happened? Quantify if possible. What did you learn?" }].map((item, i) => (
-          <div key={i} style={{ background: "#fff", border: "1px solid #2C2C2C", borderRadius: 10, padding: 14 }}>
+          <div key={i} style={{ background: "#fff", border: "1px solid #E2E8F0", borderRadius: 10, padding: 14, boxShadow: "0 1px 4px rgba(0,0,0,0.04)" }}>
             <div style={{ width: 32, height: 32, borderRadius: 6, background: AMBER, color: NAVY, display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 900, fontSize: 17, marginBottom: 8 }}>{item.l}</div>
             <p style={{ color: NAVY, fontWeight: 800, fontSize: 13, margin: "0 0 4px", textTransform: "uppercase", letterSpacing: 0.5 }}>{item.w}</p>
             <p style={{ color: "#444", fontSize: 12, lineHeight: 1.5, margin: 0 }}>{item.d}</p>
@@ -489,7 +489,7 @@ function STARModule() {
       </Card>
       <div style={{ display: "flex", gap: 6, marginBottom: 12 }}>
         {["weak","good","strong"].map(t => (
-          <button key={t} onClick={() => setTier(t)} style={{ flex: 1, padding: "8px 4px", background: tier === t ? tierCol[t] : "#fff", border: `2px solid ${tierCol[t]}`, color: tier === t ? (t === "good" ? "#111" : "#fff") : tierCol[t], borderRadius: 8, fontWeight: 700, fontSize: 11, cursor: "pointer", fontFamily: "inherit", textTransform: "uppercase" }}>
+          <button key={t} onClick={() => setTier(t)} style={{ flex: 1, padding: "8px 4px", background: tier === t ? tierCol[t] : "#fff", border: `2px solid ${tierCol[t]}`, color: tier === t ? (t === "good" ? NAVY : "#fff") : tierCol[t], borderRadius: 8, fontWeight: 700, fontSize: 11, cursor: "pointer", fontFamily: "inherit", textTransform: "uppercase" }}>
             {t === "weak" ? "✗ Weak" : t === "good" ? "◎ Good" : "✓ Strong"}
           </button>
         ))}
@@ -500,14 +500,14 @@ function STARModule() {
       </div>
       <div style={{ background: "#EFF6FF", borderLeft: `3px solid ${TEAL}`, borderRadius: 8, padding: 12, marginBottom: 16 }}>
         <p style={{ color: TEAL, fontWeight: 700, fontSize: 11, textTransform: "uppercase", margin: "0 0 4px" }}>Coach commentary</p>
-        <p style={{ color: "#8CC", fontSize: 13, lineHeight: 1.65, margin: 0 }}>{ex.why}</p>
+        <p style={{ color: "#1A4A6B", fontSize: 13, lineHeight: 1.65, margin: 0 }}>{ex.why}</p>
       </div>
       <Card>
         <p style={{ color: TEAL, fontWeight: 800, fontSize: 12, margin: "0 0 10px", textTransform: "uppercase" }}>✍️ Build your own STAR answer</p>
         {[{ label:"S — Situation", ph:"Where were you? When? What was happening?" }, { label:"T — Task", ph:"What was your specific responsibility?" }, { label:"A — Action", ph:"What did YOU do? (Use 'I', not 'we')" }, { label:"R — Result", ph:"What happened? What did you learn? Can you quantify it?" }].map((f, i) => (
           <div key={i} style={{ marginBottom: 10 }}>
             <p style={{ color: AMBER, fontSize: 12, fontWeight: 700, margin: "0 0 4px", textTransform: "uppercase" }}>{f.label}</p>
-            <textarea rows={2} placeholder={f.ph} style={{ width: "100%", background: "#F8FAFC", border: "1px solid #2C2C2C", borderRadius: 8, padding: 10, color: NAVY, fontSize: 13, fontFamily: "inherit", resize: "none", boxSizing: "border-box" }} />
+            <textarea rows={2} placeholder={f.ph} style={{ width: "100%", background: "#fff", border: "1px solid #E2E8F0", borderRadius: 8, padding: 10, color: NAVY, fontSize: 13, fontFamily: "inherit", resize: "none", boxSizing: "border-box" }} />
           </div>
         ))}
         <p style={{ color: "#444", fontSize: 12, margin: "4px 0 0" }}>💡 Paste into the AI Coach for feedback.</p>
@@ -529,7 +529,7 @@ function InterviewModule() {
         <p style={{ color: "#444", fontSize: 11, textTransform: "uppercase", margin: "0 0 5px" }}>Interview question</p>
         <p style={{ color: NAVY, fontWeight: 800, fontSize: 15, margin: "0 0 12px" }}>"{q.q}"</p>
         <div style={{ background: "#F0FDF4", borderLeft: `3px solid ${TEAL}`, borderRadius: 8, padding: "9px 11px" }}>
-          <p style={{ color: "#8CC", fontSize: 13, lineHeight: 1.6, margin: 0 }}>💡 <strong style={{ color: TEAL }}>Tip:</strong> {q.tip}</p>
+          <p style={{ color: "#1A4A6B", fontSize: 13, lineHeight: 1.6, margin: 0 }}>💡 <strong style={{ color: TEAL }}>Tip:</strong> {q.tip}</p>
         </div>
       </Card>
       <div style={{ display: "flex", gap: 8, marginBottom: 12 }}>
@@ -540,7 +540,7 @@ function InterviewModule() {
       {reveal === "weak" && <div style={{ background: "#FEF2F2", border: `1px solid ${RUST}30`, borderLeft: `3px solid ${RUST}`, borderRadius: 10, padding: 14, marginBottom: 12 }}><p style={{ color: RUST, fontWeight: 700, fontSize: 11, textTransform: "uppercase", margin: "0 0 8px" }}>✗ Weak Answer</p><p style={{ color: "#444", fontSize: 14, lineHeight: 1.7, margin: 0 }}>{q.weak}</p></div>}
       <Card>
         <p style={{ color: TEAL, fontWeight: 700, fontSize: 12, margin: "0 0 8px", textTransform: "uppercase" }}>🎤 Practise your answer</p>
-        <textarea placeholder="Type your answer using the STAR method..." rows={4} style={{ width: "100%", background: "#F8FAFC", border: "1px solid #2C2C2C", borderRadius: 8, padding: 12, color: NAVY, fontSize: 13, fontFamily: "inherit", resize: "vertical", boxSizing: "border-box" }} />
+        <textarea placeholder="Type your answer using the STAR method..." rows={4} style={{ width: "100%", background: "#fff", border: "1px solid #E2E8F0", borderRadius: 8, padding: 12, color: NAVY, fontSize: 13, fontFamily: "inherit", resize: "vertical", boxSizing: "border-box" }} />
         <p style={{ color: "#444", fontSize: 12, marginTop: 8, marginBottom: 0 }}>💡 Paste into the AI Coach for feedback.</p>
       </Card>
     </div>
@@ -580,8 +580,8 @@ function TechnicalModule() {
               {q.opts.map((opt, j) => {
                 let bg = "#F8FAFC", border = "1px solid #E2E8F0", col = "#555";
                 if (answered) {
-                  if (j === correctIdx) { bg = "#0A1A0A"; border = `1px solid ${GREEN}`; col = GREEN; }
-                  else if (j === state[key]) { bg = "#1A0A0A"; border = `1px solid ${RUST}`; col = RUST; }
+                  if (j === correctIdx) { bg = "#F0FDF4"; border = `1px solid ${GREEN}`; col = "#14532D"; }
+                  else if (j === state[key]) { bg = "#FEF2F2"; border = `1px solid ${RUST}`; col = "#7F1D1D"; }
                 }
                 return (
                   <button key={j} onClick={() => handleAnswer(i, j)}
@@ -596,7 +596,7 @@ function TechnicalModule() {
                 <p style={{ color: state[key] === correctIdx ? GREEN : RUST, fontWeight: 700, fontSize: 11, margin: "0 0 4px", textTransform: "uppercase" }}>
                   {state[key] === correctIdx ? "✅ Correct" : `✗ Incorrect — answer: ${q.a}`}
                 </p>
-                <p style={{ color: "#8CC", fontSize: 13, lineHeight: 1.6, margin: 0 }}>💡 {q.why}</p>
+                <p style={{ color: "#1A4A6B", fontSize: 13, lineHeight: 1.6, margin: 0 }}>💡 {q.why}</p>
               </div>
             )}
           </div>
@@ -658,8 +658,8 @@ function CITBModule() {
         {q.opts.map((opt, i) => {
           let bg = "#F8FAFC", border = "1px solid #E2E8F0", col = "#555";
           if (answered !== null) {
-            if (i === q.correct) { bg = "#0A1A0A"; border = `1px solid ${GREEN}`; col = GREEN; }
-            else if (i === answered) { bg = "#1A0A0A"; border = `1px solid ${RUST}`; col = RUST; }
+            if (i === q.correct) { bg = "#F0FDF4"; border = `1px solid ${GREEN}`; col = "#14532D"; }
+            else if (i === answered) { bg = "#FEF2F2"; border = `1px solid ${RUST}`; col = "#7F1D1D"; }
           }
           return (
             <button key={i} onClick={() => handleAnswer(i)}
@@ -695,7 +695,7 @@ function CaseStudiesModule() {
           <button key={i} onClick={() => setActive(i)}
             style={{ background: active === i ? "#fff" : "#F8FAFC", border: active === i ? `1px solid ${AMBER}` : "1px solid #E2E8F0", borderRadius: 10, padding: "11px 14px", boxShadow: active === i ? "0 2px 8px rgba(0,0,0,0.06)" : "none", textAlign: "left", cursor: "pointer", fontFamily: "inherit" }}>
             <div style={{ display: "flex", justifyContent: "space-between" }}>
-              <span style={{ color: active === i ? WARM : "#777", fontWeight: 700, fontSize: 13 }}>{cs.name}, {cs.age}</span>
+              <span style={{ color: active === i ? NAVY : "#555", fontWeight: 700, fontSize: 13 }}>{c.name}, {cs.age}</span>
               <span style={{ fontSize: 12, color: active === i ? AMBER : "#555" }}>{cs.outcomeIcon}</span>
             </div>
             <span style={{ color: "#444", fontSize: 11 }}>#{cs.tag}</span>
@@ -713,7 +713,7 @@ function CaseStudiesModule() {
         <p style={{ color: "#444", fontSize: 14, lineHeight: 1.75, marginBottom: 14 }}>{c.story}</p>
         <div style={{ background: "#EFF6FF", borderLeft: `4px solid ${TEAL}`, borderRadius: 8, padding: 12 }}>
           <p style={{ color: TEAL, fontWeight: 700, fontSize: 11, textTransform: "uppercase", margin: "0 0 4px" }}>📌 Key lesson</p>
-          <p style={{ color: "#8CC", fontSize: 13, lineHeight: 1.65, margin: 0 }}>{c.lesson}</p>
+          <p style={{ color: "#1A4A6B", fontSize: 13, lineHeight: 1.65, margin: 0 }}>{c.lesson}</p>
         </div>
       </Card>
     </div>
@@ -731,8 +731,8 @@ function RoadmapModule() {
         {ROADMAP.map((r, i) => (
           <button key={i} onClick={() => setActive(i)}
             style={{ background: active === i ? "#fff" : "#F8FAFC", border: active === i ? `1px solid ${AMBER}` : "1px solid #E2E8F0", borderRadius: 10, padding: "10px 14px", boxShadow: active === i ? "0 2px 8px rgba(0,0,0,0.06)" : "none", textAlign: "left", cursor: "pointer", fontFamily: "inherit", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-            <span style={{ color: active === i ? WARM : "#777", fontWeight: 700, fontSize: 13 }}>{r.phase}</span>
-            <span style={{ color: active === i ? AMBER : "#555", fontSize: 11, fontWeight: 700 }}>{r.weeks}</span>
+            <span style={{ color: active === i ? NAVY : "#555", fontWeight: 700, fontSize: 13 }}>{r.phase}</span>
+            <span style={{ color: active === i ? AMBER : "#888", fontSize: 11, fontWeight: 700 }}>{r.weeks}</span>
           </button>
         ))}
       </div>
@@ -751,11 +751,11 @@ function RoadmapModule() {
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
           <div style={{ background: "#F0FDF4", borderRadius: 8, padding: 12 }}>
             <p style={{ color: GREEN, fontWeight: 700, fontSize: 11, margin: "0 0 8px", textTransform: "uppercase" }}>✓ Do</p>
-            {["Arrive 10–15 minutes early", "Wear smart, clean clothing", "Bring ID and certificates", "Ask at least 2 questions", "Make eye contact and engage"].map((t, i) => <p key={i} style={{ color: "#7A9", fontSize: 12, margin: "0 0 4px" }}>• {t}</p>)}
+            {["Arrive 10–15 minutes early", "Wear smart, clean clothing", "Bring ID and certificates", "Ask at least 2 questions", "Make eye contact and engage"].map((t, i) => <p key={i} style={{ color: "#166534", fontSize: 12, margin: "0 0 4px" }}>• {t}</p>)}
           </div>
           <div style={{ background: "#FEF2F2", borderRadius: 8, padding: 12 }}>
             <p style={{ color: RUST, fontWeight: 700, fontSize: 11, margin: "0 0 8px", textTransform: "uppercase" }}>✗ Don't</p>
-            {["Arrive late or unprepared", "Use casual or slang language", "Badmouth past employers", "Leave without asking anything", "Give yes/no answers only"].map((t, i) => <p key={i} style={{ color: "#A77", fontSize: 12, margin: "0 0 4px" }}>• {t}</p>)}
+            {["Arrive late or unprepared", "Use casual or slang language", "Badmouth past employers", "Leave without asking anything", "Give yes/no answers only"].map((t, i) => <p key={i} style={{ color: "#991B1B", fontSize: 12, margin: "0 0 4px" }}>• {t}</p>)}
           </div>
         </div>
       </Card>
@@ -827,14 +827,14 @@ function CoachModule() {
   }
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", height: "calc(100vh - 200px)", minHeight: 400 }}>
+    <div style={{ display: "flex", flexDirection: "column", height: "calc(100vh - 180px)", minHeight: 480 }}>
       <div style={{ background: "#EFF6FF", borderLeft: `3px solid ${TEAL}`, borderRadius: 8, padding: "9px 13px", marginBottom: 10 }}>
-        <p style={{ color: "#8CC", fontSize: 13, margin: 0 }}>💡 Try a mock interview, get STAR feedback, or paste your personal statement for a review.</p>
+        <p style={{ color: "#1A5276", fontSize: 13, margin: 0 }}>💡 Try a mock interview, get STAR feedback, or paste your personal statement for a review.</p>
       </div>
       <div style={{ display: "flex", gap: 6, marginBottom: 10, overflowX: "auto", paddingBottom: 4 }}>
         {PROMPTS.map((p, i) => <button key={i} onClick={() => setInput(p)} style={{ background: TEAL + "15", border: `1px solid ${TEAL}40`, color: TEAL, borderRadius: 99, padding: "5px 11px", whiteSpace: "nowrap", fontSize: 11, fontWeight: 600, cursor: "pointer", flexShrink: 0, fontFamily: "inherit" }}>{p}</button>)}
       </div>
-      <div style={{ flex: 1, overflowY: "auto", display: "flex", flexDirection: "column", gap: 10, paddingRight: 4 }}>
+      <div style={{ flex: 1, overflowY: "auto", display: "flex", flexDirection: "column", gap: 12, paddingRight: 4, paddingBottom: 8 }}>
         {messages.map((m, i) => (
           <div key={i} style={{ display: "flex", justifyContent: m.role === "user" ? "flex-end" : "flex-start" }}>
             <div style={{ maxWidth: "85%", padding: "10px 14px", borderRadius: m.role === "user" ? "14px 14px 4px 14px" : "14px 14px 14px 4px", background: m.role === "user" ? NAVY : "#fff", color: m.role === "user" ? "#fff" : NAVY, fontSize: 14, lineHeight: 1.7, whiteSpace: "pre-wrap", border: m.role === "assistant" ? "1px solid #E2E8F0" : "none", boxShadow: m.role === "assistant" ? "0 1px 4px rgba(0,0,0,0.06)" : "none" }}>
@@ -842,11 +842,11 @@ function CoachModule() {
             </div>
           </div>
         ))}
-        {loading && <div style={{ display: "flex", justifyContent: "flex-start" }}><div style={{ background: "#fff", border: "1px solid #2C2C2C", borderRadius: "14px 14px 14px 4px", padding: "11px 15px" }}><div style={{ display: "flex", gap: 4 }}>{[0,1,2].map(i => <div key={i} style={{ width: 6, height: 6, background: TEAL, borderRadius: 99, animation: `b 1.2s ${i*0.2}s infinite` }} />)}</div></div></div>}
+        {loading && <div style={{ display: "flex", justifyContent: "flex-start" }}><div style={{ background: "#fff", border: "1px solid #E2E8F0", borderRadius: "14px 14px 14px 4px", padding: "11px 15px" }}><div style={{ display: "flex", gap: 4 }}>{[0,1,2].map(i => <div key={i} style={{ width: 6, height: 6, background: TEAL, borderRadius: 99, animation: `b 1.2s ${i*0.2}s infinite` }} />)}</div></div></div>}
         <div ref={bottomRef} />
       </div>
       <div style={{ display: "flex", gap: 8, marginTop: 10 }}>
-        <textarea value={input} onChange={e => setInput(e.target.value)} onKeyDown={e => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); send(); } }} placeholder="Ask your coach anything, or paste your statement or STAR answer for feedback..." rows={2} style={{ flex: 1, background: "#fff", border: "1px solid #2C2C2C", borderRadius: 10, padding: "10px 13px", color: NAVY, fontSize: 14, fontFamily: "inherit", resize: "none", minHeight: 50, boxSizing: "border-box" }} />
+        <textarea value={input} onChange={e => setInput(e.target.value)} onKeyDown={e => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); send(); } }} placeholder="Ask your coach anything, or paste your statement or STAR answer for feedback..." rows={2} style={{ flex: 1, background: "#fff", border: "1px solid #E2E8F0", borderRadius: 10, padding: "10px 13px", color: NAVY, fontSize: 14, fontFamily: "inherit", resize: "none", minHeight: 50, boxSizing: "border-box" }} />
         <button onClick={send} disabled={loading || !input.trim()} style={{ background: input.trim() ? TEAL : "#E2E8F0", border: "none", color: input.trim() ? "#fff" : "#999", borderRadius: 10, padding: "0 16px", cursor: input.trim() ? "pointer" : "default", fontSize: 20 }}>↑</button>
       </div>
       <style>{`@keyframes b{0%,80%,100%{transform:translateY(0)}40%{transform:translateY(-5px)}}`}</style>
