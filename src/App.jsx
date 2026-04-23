@@ -5,8 +5,8 @@ const TEAL  = "#1A9E8F";
 const AMBER = "#F4A623";
 const RUST  = "#C0392B";
 const GREEN = "#1A6B3A";
-const CONCRETE = "#1A1A1A";
-const WARM  = "#F5F0E8";
+const CONCRETE = "#0D1B3E"; // kept for AMBER button text
+const WARM  = "#0D1B3E"; // main text on light bg
 
 function TASSLogo({ size = "md", theme = "light" }) {
   const scales = {
@@ -221,17 +221,17 @@ function SectionHeader({ icon, title, subtitle }) {
     <div style={{ marginBottom: 20 }}>
       <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 6 }}>
         <span style={{ fontSize: 22 }}>{icon}</span>
-        <h2 style={{ color: WARM, fontSize: 19, fontWeight: 900, margin: 0, letterSpacing: "-0.01em", textTransform: "uppercase" }}>{title}</h2>
+        <h2 style={{ color: NAVY, fontSize: 19, fontWeight: 900, margin: 0, letterSpacing: "-0.01em", textTransform: "uppercase" }}>{title}</h2>
       </div>
       <div style={{ height: 3, width: 44, background: AMBER, borderRadius: 2, marginBottom: 8 }} />
-      {subtitle && <p style={{ color: "#777", fontSize: 13, lineHeight: 1.6, margin: 0 }}>{subtitle}</p>}
+      {subtitle && <p style={{ color: "#444", fontSize: 13, lineHeight: 1.6, margin: 0 }}>{subtitle}</p>}
     </div>
   );
 }
 
 function Card({ children, style = {} }) {
   return (
-    <div style={{ background: "#1A1A1A", border: "1px solid #2C2C2C", borderRadius: 10, padding: 16, marginBottom: 12, ...style }}>
+    <div style={{ background: "#fff", border: "1px solid #E2E8F0", borderRadius: 10, padding: 16, marginBottom: 12, ...style }}>
       {children}
     </div>
   );
@@ -242,7 +242,7 @@ function TabBar({ options, active, onSelect }) {
     <div style={{ display: "flex", flexWrap: "wrap", gap: 6, marginBottom: 14 }}>
       {options.map((opt, i) => (
         <button key={i} onClick={() => onSelect(opt.id || opt)}
-          style={{ background: active === (opt.id || opt) ? AMBER : "#1A1A1A", color: active === (opt.id || opt) ? "#111" : "#777", border: `1px solid ${active === (opt.id || opt) ? AMBER : "#2C2C2C"}`, borderRadius: 20, padding: "6px 12px", fontSize: 11, fontWeight: active === (opt.id || opt) ? 800 : 400, cursor: "pointer", fontFamily: "inherit", textTransform: "uppercase", letterSpacing: 0.3, whiteSpace: "nowrap" }}>
+          style={{ background: active === (opt.id || opt) ? AMBER : "#1A1A1A", color: active === (opt.id || opt) ? "#111" : "#777", border: `1px solid ${active === (opt.id || opt) ? AMBER : "#E2E8F0"}`, borderRadius: 20, padding: "6px 12px", fontSize: 11, fontWeight: active === (opt.id || opt) ? 800 : 400, cursor: "pointer", fontFamily: "inherit", textTransform: "uppercase", letterSpacing: 0.3, whiteSpace: "nowrap" }}>
           {opt.label || opt}
         </button>
       ))}
@@ -263,15 +263,15 @@ function SectorModule() {
     <div>
       <SectionHeader icon="🔍" title="Sector Overview" subtitle="What construction is, who the employers are, and why it is a serious career choice." />
       {items.map((item, i) => (
-        <div key={i} style={{ background: "#1A1A1A", border: `1px solid ${open === i ? AMBER : "#2C2C2C"}`, borderRadius: 10, overflow: "hidden", marginBottom: 10 }}>
+        <div key={i} style={{ background: "#fff", border: `1px solid ${open === i ? AMBER : "#E2E8F0"}`, borderRadius: 10, overflow: "hidden", marginBottom: 10 }}>
           <button onClick={() => setOpen(open === i ? null : i)}
             style={{ width: "100%", background: "none", border: "none", padding: "13px 15px", display: "flex", justifyContent: "space-between", alignItems: "center", cursor: "pointer", fontFamily: "inherit" }}>
-            <span style={{ color: WARM, fontWeight: 700, fontSize: 14, textAlign: "left" }}>{item.title}</span>
+            <span style={{ color: NAVY, fontWeight: 700, fontSize: 14, textAlign: "left" }}>{item.title}</span>
             <span style={{ color: AMBER, fontSize: 20, flexShrink: 0 }}>{open === i ? "−" : "+"}</span>
           </button>
           {open === i && (
-            <div style={{ padding: "0 15px 15px", borderTop: "1px solid #2C2C2C" }}>
-              <p style={{ color: "#AAA", fontSize: 13, lineHeight: 1.75, margin: "12px 0 0", whiteSpace: "pre-line" }}>{item.content}</p>
+            <div style={{ padding: "0 15px 15px", borderTop: "1px solid #E2E8F0" }}>
+              <p style={{ color: "#444", fontSize: 13, lineHeight: 1.75, margin: "12px 0 0", whiteSpace: "pre-line" }}>{item.content}</p>
             </div>
           )}
         </div>
@@ -282,14 +282,22 @@ function SectorModule() {
 
 function PathwaysModule() {
   const paths = [
-    { trade: "Carpentry & Joinery",     level: "SCQF 6",   duration: "2–3 years", qual: "SVQ L2/L3", body: "CITB",        entry: "Nat5 English and Maths preferred",               next: "HNC Construction, Site Supervisor" },
-    { trade: "Bricklaying",             level: "SCQF 5/6", duration: "2 years",   qual: "SVQ L2",   body: "CITB",        entry: "Nat5 English and Maths preferred",               next: "Advanced Bricklaying, Site Work" },
-    { trade: "Plumbing & Heating",      level: "SCQF 7",   duration: "4 years",   qual: "SVQ L3",   body: "SNIPEF",      entry: "Nat5 English, Maths and Technical subject",      next: "Gas Engineer, Heating Systems Specialist" },
-    { trade: "Electrical Installation", level: "SCQF 7",   duration: "3–4 years", qual: "SVQ L3",   body: "SELECT/CITB", entry: "Nat5 English, Maths, Physics preferred",          next: "HNC Electrical Engineering, Contracts Manager" },
-    { trade: "Plastering & Dry Lining", level: "SCQF 5/6", duration: "2 years",   qual: "SVQ L2",   body: "CITB",        entry: "Nat5 preferred, practical aptitude",             next: "Advanced Plastering, Site Finishing" },
-    { trade: "Painting & Decorating",   level: "SCQF 5/6", duration: "2 years",   qual: "SVQ L2",   body: "CITB",        entry: "Nat5 preferred",                                  next: "Specialist Finishes, Heritage Restoration" },
-    { trade: "Roofing",                 level: "SCQF 5/6", duration: "2–3 years", qual: "SVQ L2",   body: "CITB",        entry: "Nat5 preferred, no fear of heights",              next: "Advanced Roofing, Heritage Slating" },
-    { trade: "Plant Operations",        level: "SCQF 5/6", duration: "1–2 years", qual: "SVQ L2 + CPCS", body: "CITB",  entry: "Nat5 preferred, clean driving licence helpful",   next: "CPCS Advanced, Crane Operator, Site Supervisor" },
+    { trade: "Carpentry & Joinery",     level: "SCQF 6",   duration: "2–3 years", qual: "SVQ L2/L3", body: "CITB",        entry: "Nat5 English and Maths preferred",               next: "HNC Construction, Site Supervisor",
+      desc: "Carpenters and joiners work with timber to create and install structural and decorative elements in buildings. This includes framing walls and roofs, fitting doors, windows and staircases, laying floors, installing skirting boards and architraves, and producing bespoke joinery items in a workshop. It is one of the most versatile trades — carpenters work on everything from new-build housing to heritage restoration. A skilled joiner can see the results of their work in every building they help complete." },
+    { trade: "Bricklaying",             level: "SCQF 5/6", duration: "2 years",   qual: "SVQ L2",   body: "CITB",        entry: "Nat5 English and Maths preferred",               next: "Advanced Bricklaying, Site Work",
+      desc: "Bricklayers build the walls, foundations and structures that form the bones of buildings. They lay bricks, blocks and stone using mortar, following plans and specifications to exact measurements. Bricklayers work on everything from individual houses to large-scale commercial and public buildings. The trade requires physical fitness, a good eye for straight lines and levels, and patience to produce clean, accurate work. In Scotland there is strong demand for bricklayers across housing, school building and commercial construction projects." },
+    { trade: "Plumbing & Heating",      level: "SCQF 7",   duration: "4 years",   qual: "SVQ L3",   body: "SNIPEF",      entry: "Nat5 English, Maths and Technical subject",      next: "Gas Engineer, Heating Systems Specialist",
+      desc: "Plumbers and heating engineers install, maintain and repair the systems that supply water, remove waste and provide heat in buildings. This covers cold and hot water supply, central heating systems, radiators, boilers, underfloor heating, heat pumps and renewable energy systems. In Scotland, the only recognised route is the 4-year Modern Apprenticeship in Plumbing and Heating managed by SNIPEF. As Scotland transitions to low-carbon heating — replacing gas boilers with heat pumps — demand for qualified plumbers has never been higher." },
+    { trade: "Electrical Installation",  level: "SCQF 7",   duration: "3–4 years", qual: "SVQ L3",   body: "SELECT/CITB", entry: "Nat5 English, Maths, Physics preferred",          next: "HNC Electrical Engineering, Contracts Manager",
+      desc: "Electrical installation apprentices learn to install, test and maintain the wiring systems, circuits, lighting, power outlets and control systems in buildings of all types. Electricians work from technical drawings, running cables through walls and ceilings, connecting distribution boards and ensuring all work meets strict safety standards set by BS7671 (the Wiring Regulations). The electrical trade is central to Scotland's net zero transition — EV charger installation, solar panel systems and smart building controls are all growth areas." },
+    { trade: "Plastering & Dry Lining",  level: "SCQF 5/6", duration: "2 years",   qual: "SVQ L2",   body: "CITB",        entry: "Nat5 preferred, practical aptitude",             next: "Advanced Plastering, Site Finishing",
+      desc: "Plasterers apply smooth, durable coatings to internal walls and ceilings, creating the finished surfaces that the rest of the building's decoration depends on. There are two main methods: wet plastering (applying layers of wet plaster using a trowel) and dry lining (fixing pre-made plasterboard to create flat, smooth surfaces quickly). Plasterers also repair and restore damaged plaster in older buildings, which requires skill and sensitivity. The trade rewards those with a steady hand, good spatial awareness and patience for achieving a truly flat, seamless finish." },
+    { trade: "Painting & Decorating",   level: "SCQF 5/6", duration: "2 years",   qual: "SVQ L2",   body: "CITB",        entry: "Nat5 preferred",                                  next: "Specialist Finishes, Heritage Restoration",
+      desc: "Painters and decorators apply protective and decorative finishes to internal and external surfaces — walls, ceilings, woodwork, metalwork and more. The trade involves much more than applying paint: preparation (filling, sanding, priming), selecting the right products for each surface and environment, applying finishes by brush, roller and spray, and hanging wallpaper and other wall coverings. Specialist decorators work on heritage buildings, theatrical sets and high-end interiors, using traditional techniques including gilding, murals and specialist paint effects." },
+    { trade: "Roofing",                 level: "SCQF 5/6", duration: "2–3 years", qual: "SVQ L2",   body: "CITB",        entry: "Nat5 preferred, no fear of heights",              next: "Advanced Roofing, Heritage Slating",
+      desc: "Roofers install and repair the coverings that protect buildings from the Scottish weather. This includes laying slates and tiles, fitting flat roofing systems (felt, GRP, EPDM), installing gutters and rainwater systems, and applying flashing around chimneys, skylights and walls. Roofers work at height every day and must be comfortable with scaffolding, roof ladders and safety harnesses. The trade has strong demand in Scotland given the volume of older housing stock requiring re-roofing, as well as new-build and commercial roofing projects." },
+    { trade: "Plant Operations",        level: "SCQF 5/6", duration: "1–2 years", qual: "SVQ L2 + CPCS", body: "CITB",  entry: "Nat5 preferred, clean driving licence helpful",   next: "CPCS Advanced, Crane Operator, Site Supervisor",
+      desc: "Plant operators are responsible for operating heavy construction machinery — excavators, bulldozers, dumpers, telescopic handlers, piling rigs and cranes. They prepare and clear sites, dig foundations, move materials, and carry out earthworks for roads and infrastructure. Every machine requires a specific CPCS (Construction Plant Competence Scheme) card to operate legally on site. Plant operators are critical from the very first day of any major project and are consistently among the most in-demand workers in construction across Scotland." },
   ];
   const [active, setActive] = useState(0);
   const p = paths[active];
@@ -299,11 +307,12 @@ function PathwaysModule() {
       <Callout text="All Scottish Modern Apprenticeships are open to anyone aged 16 and above. There is no upper age limit. You earn a wage from day one." type="success" />
       <TabBar options={paths.map((p, i) => ({ id: i, label: p.trade.split(" ")[0] }))} active={active} onSelect={setActive} />
       <Card>
-        <p style={{ color: AMBER, fontWeight: 800, fontSize: 15, margin: "0 0 14px", textTransform: "uppercase", letterSpacing: 0.5 }}>{p.trade}</p>
+        <p style={{ color: AMBER, fontWeight: 800, fontSize: 15, margin: "0 0 10px", textTransform: "uppercase", letterSpacing: 0.5 }}>{p.trade}</p>
+        <p style={{ color: "#444", fontSize: 14, lineHeight: 1.75, margin: "0 0 14px", paddingBottom: 14, borderBottom: "1px solid #E2E8F0" }}>{p.desc}</p>
         {[["SCQF Level", p.level], ["Duration", p.duration], ["Qualification", p.qual], ["Managed by", p.body], ["Entry requirements", p.entry], ["Progression", p.next]].map(([label, val], i) => (
           <div key={i} style={{ display: "flex", gap: 12, padding: "9px 0", borderBottom: i < 5 ? "1px solid #2C2C2C" : "none" }}>
-            <span style={{ color: "#555", fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: 0.5, minWidth: 110, flexShrink: 0 }}>{label}</span>
-            <span style={{ color: WARM, fontSize: 13, lineHeight: 1.5 }}>{val}</span>
+            <span style={{ color: "#444", fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: 0.5, minWidth: 110, flexShrink: 0 }}>{label}</span>
+            <span style={{ color: NAVY, fontSize: 13, lineHeight: 1.5 }}>{val}</span>
           </div>
         ))}
       </Card>
@@ -318,7 +327,7 @@ function PathwaysModule() {
           ["Apprenticeships.Scot", "Year-round", "Varies", "Varies"],
         ].map(([employer, open, close, start], i) => (
           <div key={i} style={{ display: "grid", gridTemplateColumns: "1.6fr 1fr 1fr 1fr", gap: 6, padding: "7px 0", borderBottom: i < 5 ? "1px solid #2C2C2C" : "none", alignItems: "center" }}>
-            <span style={{ color: WARM, fontSize: 12 }}>{employer}</span>
+            <span style={{ color: NAVY, fontSize: 12 }}>{employer}</span>
             <span style={{ color: TEAL, fontSize: 10, fontWeight: 700 }}>Opens: {open}</span>
             <span style={{ color: AMBER, fontSize: 10, fontWeight: 700 }}>Closes: {close}</span>
             <span style={{ color: GREEN, fontSize: 10, fontWeight: 700 }}>Start: {start}</span>
@@ -329,13 +338,53 @@ function PathwaysModule() {
   );
 }
 
+function ExampleCard({ ex }) {
+  const [show, setShow] = useState(null);
+  return (
+    <div style={{ background: "#fff", border: "1px solid #E2E8F0", borderRadius: 12, overflow: "hidden", marginBottom: 12 }}>
+      <div style={{ background: NAVY, padding: "10px 14px" }}>
+        <p style={{ color: TEAL, fontWeight: 700, fontSize: 13, margin: 0 }}>Profile: {ex.label}</p>
+      </div>
+      <div style={{ padding: 14 }}>
+        <div style={{ display: "flex", gap: 8, marginBottom: 10 }}>
+          <button onClick={() => setShow(show === "weak" ? null : "weak")}
+            style={{ flex: 1, padding: "8px 6px", background: show === "weak" ? RUST : "#fff", border: `2px solid ${RUST}`, color: show === "weak" ? "#fff" : RUST, borderRadius: 8, fontWeight: 700, fontSize: 11, cursor: "pointer", fontFamily: "inherit", textTransform: "uppercase" }}>
+            {show === "weak" ? "Hide" : "✗ Weak"}
+          </button>
+          <button onClick={() => setShow(show === "strong" ? null : "strong")}
+            style={{ flex: 1, padding: "8px 6px", background: show === "strong" ? GREEN : "#fff", border: `2px solid ${GREEN}`, color: show === "strong" ? "#fff" : GREEN, borderRadius: 8, fontWeight: 700, fontSize: 11, cursor: "pointer", fontFamily: "inherit", textTransform: "uppercase" }}>
+            {show === "strong" ? "Hide" : "✓ Strong"}
+          </button>
+        </div>
+        {show === "weak" && (
+          <div style={{ background: "#FEF2F2", border: `1px solid ${RUST}30`, borderLeft: `3px solid ${RUST}`, borderRadius: 8, padding: 12 }}>
+            <p style={{ color: RUST, fontWeight: 700, fontSize: 11, textTransform: "uppercase", margin: "0 0 6px" }}>✗ Weak — no research, no evidence</p>
+            <p style={{ color: "#7F1D1D", fontSize: 13, lineHeight: 1.7, margin: 0, fontStyle: "italic" }}>{ex.weak}</p>
+          </div>
+        )}
+        {show === "strong" && (
+          <div style={{ background: "#F0FDF4", border: `1px solid ${GREEN}30`, borderLeft: `3px solid ${GREEN}`, borderRadius: 8, padding: 12 }}>
+            <p style={{ color: GREEN, fontWeight: 700, fontSize: 11, textTransform: "uppercase", margin: "0 0 6px" }}>✓ Strong — specific, researched, evidenced</p>
+            <p style={{ color: "#14532D", fontSize: 13, lineHeight: 1.75, margin: 0, whiteSpace: "pre-line" }}>{ex.strong}</p>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
 function ApplyModule() {
   const [step, setStep] = useState(0);
   const steps = [
     { title: "Research & targeting", icon: "🔍", content: "Identify which apprenticeship suits you and which employers to target. Use Apprenticeships.Scot and MyJobScotland as your primary portals. Read every job description in full — the person specification is what you will be scored against.\n\nResearch the employer specifically: what do they build, what do they value, what recent projects have they worked on? Generic applications fail.", tip: "Save the job advert before applying — it sometimes disappears after the closing date." },
     { title: "Prepare your documents", icon: "📋", content: "Before you apply, gather:\n• Updated CV (use the CV tab)\n• National 5 results and school certificates\n• Passport or birth certificate\n• Two referee contacts: teachers, coaches, employers\n• Any relevant certificates: CSCS card, first aid, CITB card if held\n\nHaving everything ready means you can apply quickly when a role opens — some close within days.", tip: "Brief your referees before listing them. Tell them what the role involves and what you would like them to highlight." },
     { title: "Apprenticeships.Scot and MyJobScotland", icon: "🌐", content: "Create accounts on both portals. Complete your profile fully — incomplete profiles are screened out before a human reads them.\n\nApprenticeships.Scot:\n• Filter by Modern Apprenticeship and your trade\n• Set up email alerts so you are notified when new roles are posted\n\nMyJobScotland (for council jobs):\n• Your profile is your application foundation — complete every section\n• Use the personal statement box; do not leave it to your CV alone\n• Most council applications score each answer against a competency framework", tip: "Set your alerts to immediate notification, not weekly digest. Some roles close within 48 hours of posting." },
-    { title: "Writing your personal statement", icon: "✍️", content: "The personal statement is 150 to 200 words. It answers three questions:\n1. Who are you and what relevant background do you have?\n2. Why this apprenticeship — what specifically attracts you?\n3. Why this employer — what have you found in your research?\n\nPart 3 is what most candidates skip. Mentioning a specific project, contract or value from the employer's website transforms a generic statement into a targeted one.\n\nUse STAR principles: do not just claim skills, briefly evidence them.", tip: "Never send the same personal statement to two different employers. Each one must name the employer and reference something specific about them." },
+    { title: "Writing your personal statement", icon: "✍️", content: "The personal statement is 150 to 200 words. It answers three questions:\n1. Who are you and what relevant background do you have?\n2. Why this apprenticeship — what specifically attracts you?\n3. Why this employer — what have you found in your research?\n\nPart 3 is what most candidates skip. Mentioning a specific project, contract or value from the employer's website transforms a generic statement into a targeted one.\n\nUse STAR principles: do not just claim skills, briefly evidence them.", tip: "Never send the same personal statement to two different employers. Each one must name the employer and reference something specific about them.",
+      examples: [
+        { label: "School leaver (16–18)", weak: "I am applying for this apprenticeship because I want to learn a trade. I am hardworking and reliable and I enjoy working with my hands. I think this would be a great opportunity for me.", strong: "I am a motivated 17-year-old from Paisley with practical experience gained through two years of Saturday volunteering with a local building company, where I assisted with labouring, mixing and site clearance on residential projects. I have strong attention to detail and a genuine passion for construction — I took a bricklaying introductory course at college last year and found the precision involved genuinely satisfying.\n\nI am applying to Morrison Construction specifically because of your commitment to community benefit clauses and local supply chains on Scottish public sector projects. I want to start my career with a company that takes its responsibilities to the communities it builds in seriously, and develop into a skilled tradesperson who delivers work to the highest standard." },
+        { label: "Career changer (19–29)", weak: "I have been working in retail but I want to change career. I am a hard worker and I think I would be good at construction. I am ready for a new challenge.", strong: "After three years working as a retail supervisor, I have made a deliberate decision to pursue a career in the construction trade. My retail experience has given me strong communication skills, the ability to work under pressure and a track record of reliability — but I want to work in a role where the output is visible and the standards are measurable.\n\nI completed an introductory carpentry course at West Lothian College earlier this year and found the practical, problem-solving nature of the work exactly suited to how I learn. I am applying to Robertson Construction because of your structured apprenticeship programme and your reputation for developing people from within — I want to build a long-term career, not just find a new job." },
+      ]
+    },
     { title: "Submitting and following up", icon: "📤", content: "Before you submit:\n• Read every answer aloud — errors you cannot see, you can hear\n• Ask a teacher or adviser to review once\n• Check the application is complete with no blank fields\n• Confirm you have named the employer and role correctly\n\nAfter submitting:\n• Note the closing date and expected decision date in your calendar\n• Keep applying to other roles — do not wait for one response\n\nAfter rejection:\n• Ask for feedback if offered — it is the most valuable information you can get\n• Use it to improve your next application", tip: "Follow the employer on LinkedIn. Knowing about their recent projects makes you a sharper candidate at interview." },
   ];
   const s = steps[step];
@@ -345,7 +394,7 @@ function ApplyModule() {
       <div style={{ display: "flex", gap: 6, marginBottom: 14, overflowX: "auto", paddingBottom: 4 }}>
         {steps.map((st, i) => (
           <button key={i} onClick={() => setStep(i)}
-            style={{ background: step === i ? AMBER : "#1A1A1A", color: step === i ? "#111" : "#777", border: `1px solid ${step === i ? AMBER : "#2C2C2C"}`, borderRadius: 20, padding: "6px 12px", fontSize: 11, fontWeight: step === i ? 800 : 400, cursor: "pointer", fontFamily: "inherit", whiteSpace: "nowrap", textTransform: "uppercase", letterSpacing: 0.3 }}>
+            style={{ background: step === i ? AMBER : "#1A1A1A", color: step === i ? "#111" : "#777", border: `1px solid ${step === i ? AMBER : "#E2E8F0"}`, borderRadius: 20, padding: "6px 12px", fontSize: 11, fontWeight: step === i ? 800 : 400, cursor: "pointer", fontFamily: "inherit", whiteSpace: "nowrap", textTransform: "uppercase", letterSpacing: 0.3 }}>
             {i + 1}. {st.icon}
           </button>
         ))}
@@ -353,14 +402,22 @@ function ApplyModule() {
       <Card>
         <p style={{ color: AMBER, fontWeight: 800, fontSize: 14, margin: "0 0 4px", textTransform: "uppercase" }}>{s.icon} {s.title}</p>
         <div style={{ height: 2, width: 28, background: AMBER, borderRadius: 2, marginBottom: 12 }} />
-        <p style={{ color: "#AAA", fontSize: 14, lineHeight: 1.75, margin: "0 0 12px", whiteSpace: "pre-line" }}>{s.content}</p>
-        <div style={{ background: "#0D1A0D", border: `1px solid ${GREEN}30`, borderLeft: `3px solid ${GREEN}`, borderRadius: 8, padding: "9px 12px" }}>
+        <p style={{ color: "#444", fontSize: 14, lineHeight: 1.75, margin: "0 0 12px", whiteSpace: "pre-line" }}>{s.content}</p>
+        <div style={{ background: "#F0FDF4", border: `1px solid ${GREEN}30`, borderLeft: `3px solid ${GREEN}`, borderRadius: 8, padding: "9px 12px" }}>
           <p style={{ color: GREEN, fontSize: 12, lineHeight: 1.6, margin: 0 }}>💡 {s.tip}</p>
         </div>
       </Card>
+      {s.examples && (
+        <div style={{ marginTop: 4 }}>
+          <p style={{ color: NAVY, fontWeight: 800, fontSize: 13, margin: "0 0 10px", textTransform: "uppercase", letterSpacing: 0.5 }}>Personal statement examples</p>
+          {s.examples.map((ex, i) => (
+            <ExampleCard key={i} ex={ex} />
+          ))}
+        </div>
+      )}
       <div style={{ display: "flex", gap: 10, marginTop: 8 }}>
-        {step > 0 && <button onClick={() => setStep(s => s - 1)} style={{ flex: 1, padding: 12, background: "#1A1A1A", border: "1px solid #2C2C2C", color: WARM, borderRadius: 8, fontWeight: 700, cursor: "pointer", fontFamily: "inherit", fontSize: 14 }}>← Previous</button>}
-        {step < steps.length - 1 && <button onClick={() => setStep(s => s + 1)} style={{ flex: 1, padding: 12, background: AMBER, border: "none", color: "#111", borderRadius: 8, fontWeight: 800, cursor: "pointer", fontFamily: "inherit", fontSize: 14 }}>Next →</button>}
+        {step > 0 && <button onClick={() => setStep(s => s - 1)} style={{ flex: 1, padding: 12, background: "#fff", border: "1px solid #2C2C2C", color: NAVY, borderRadius: 8, fontWeight: 700, cursor: "pointer", fontFamily: "inherit", fontSize: 14 }}>← Previous</button>}
+        {step < steps.length - 1 && <button onClick={() => setStep(s => s + 1)} style={{ flex: 1, padding: 12, background: AMBER, border: "none", color: NAVY, borderRadius: 8, fontWeight: 800, cursor: "pointer", fontFamily: "inherit", fontSize: 14 }}>Next →</button>}
       </div>
     </div>
   );
@@ -383,18 +440,18 @@ function CVModule() {
       <TabBar options={Object.entries(sections).map(([k, v]) => ({ id: k, label: v.label.split(" ")[0] }))} active={section} onSelect={(id) => { setSection(id); setReveal(null); }} />
       <Card>
         <p style={{ color: AMBER, fontWeight: 800, fontSize: 13, margin: "0 0 6px", textTransform: "uppercase" }}>{s.label}</p>
-        <p style={{ color: "#666", fontSize: 13, lineHeight: 1.6, margin: 0 }}>📝 {s.prompt}</p>
+        <p style={{ color: "#444", fontSize: 13, lineHeight: 1.6, margin: 0 }}>📝 {s.prompt}</p>
       </Card>
       <div style={{ display: "flex", gap: 8, marginBottom: 12 }}>
         <button onClick={() => setReveal(reveal === "weak" ? null : "weak")} style={{ flex: 1, padding: 10, background: reveal === "weak" ? RUST : "#1A1A1A", border: `2px solid ${RUST}`, color: reveal === "weak" ? "#fff" : RUST, borderRadius: 8, fontWeight: 700, fontSize: 12, cursor: "pointer", fontFamily: "inherit", textTransform: "uppercase" }}>{reveal === "weak" ? "Hide" : "✗ Weak"}</button>
         <button onClick={() => setReveal(reveal === "strong" ? null : "strong")} style={{ flex: 1, padding: 10, background: reveal === "strong" ? GREEN : "#1A1A1A", border: `2px solid ${GREEN}`, color: reveal === "strong" ? "#fff" : GREEN, borderRadius: 8, fontWeight: 700, fontSize: 12, cursor: "pointer", fontFamily: "inherit", textTransform: "uppercase" }}>{reveal === "strong" ? "Hide" : "✓ Strong"}</button>
       </div>
-      {reveal === "weak" && <div style={{ background: "#1A0A0A", border: `1px solid ${RUST}30`, borderLeft: `3px solid ${RUST}`, borderRadius: 10, padding: 14, marginBottom: 12 }}><p style={{ color: RUST, fontWeight: 700, fontSize: 11, textTransform: "uppercase", margin: "0 0 8px" }}>✗ Weak — no evidence</p><pre style={{ color: "#AAA", fontSize: 13, whiteSpace: "pre-wrap", fontFamily: "inherit", margin: 0, lineHeight: 1.65 }}>{s.weak}</pre></div>}
-      {reveal === "strong" && <div style={{ background: "#0A1A0A", border: `1px solid ${GREEN}30`, borderLeft: `3px solid ${GREEN}`, borderRadius: 10, padding: 14, marginBottom: 12 }}><p style={{ color: GREEN, fontWeight: 700, fontSize: 11, textTransform: "uppercase", margin: "0 0 8px" }}>✓ Strong — specific, evidenced</p><pre style={{ color: "#CCC", fontSize: 13, whiteSpace: "pre-wrap", fontFamily: "inherit", margin: 0, lineHeight: 1.65 }}>{s.strong}</pre></div>}
+      {reveal === "weak" && <div style={{ background: "#FEF2F2", border: `1px solid ${RUST}30`, borderLeft: `3px solid ${RUST}`, borderRadius: 10, padding: 14, marginBottom: 12 }}><p style={{ color: RUST, fontWeight: 700, fontSize: 11, textTransform: "uppercase", margin: "0 0 8px" }}>✗ Weak — no evidence</p><pre style={{ color: "#444", fontSize: 13, whiteSpace: "pre-wrap", fontFamily: "inherit", margin: 0, lineHeight: 1.65 }}>{s.weak}</pre></div>}
+      {reveal === "strong" && <div style={{ background: "#F0FDF4", border: `1px solid ${GREEN}30`, borderLeft: `3px solid ${GREEN}`, borderRadius: 10, padding: 14, marginBottom: 12 }}><p style={{ color: GREEN, fontWeight: 700, fontSize: 11, textTransform: "uppercase", margin: "0 0 8px" }}>✓ Strong — specific, evidenced</p><pre style={{ color: "#333", fontSize: 13, whiteSpace: "pre-wrap", fontFamily: "inherit", margin: 0, lineHeight: 1.65 }}>{s.strong}</pre></div>}
       <Card>
         <p style={{ color: TEAL, fontWeight: 700, fontSize: 12, margin: "0 0 8px", textTransform: "uppercase" }}>✍️ Draft your {s.label.toLowerCase()}</p>
-        <textarea placeholder={`Write your ${s.label.toLowerCase()} here...`} rows={5} style={{ width: "100%", background: "#111", border: "1px solid #2C2C2C", borderRadius: 8, padding: 12, color: WARM, fontSize: 13, fontFamily: "inherit", resize: "vertical", boxSizing: "border-box", lineHeight: 1.65 }} />
-        <p style={{ color: "#555", fontSize: 12, marginTop: 8, marginBottom: 0 }}>💡 Paste into the AI Coach for personalised feedback.</p>
+        <textarea placeholder={`Write your ${s.label.toLowerCase()} here...`} rows={5} style={{ width: "100%", background: "#F8FAFC", border: "1px solid #2C2C2C", borderRadius: 8, padding: 12, color: NAVY, fontSize: 13, fontFamily: "inherit", resize: "vertical", boxSizing: "border-box", lineHeight: 1.65 }} />
+        <p style={{ color: "#444", fontSize: 12, marginTop: 8, marginBottom: 0 }}>💡 Paste into the AI Coach for personalised feedback.</p>
       </Card>
     </div>
   );
@@ -411,19 +468,19 @@ function STARModule() {
       <SectionHeader icon="⭐" title="STAR Method" subtitle="The universal answer framework for construction apprenticeship interviews." />
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8, marginBottom: 16 }}>
         {[{ l:"S", w:"Situation", d:"Set the scene — where, when, what was happening." }, { l:"T", w:"Task", d:"What was YOUR specific responsibility?" }, { l:"A", w:"Action", d:"What did YOU do? Use 'I' not 'we'. Be specific." }, { l:"R", w:"Result", d:"What happened? Quantify if possible. What did you learn?" }].map((item, i) => (
-          <div key={i} style={{ background: "#1A1A1A", border: "1px solid #2C2C2C", borderRadius: 10, padding: 14 }}>
-            <div style={{ width: 32, height: 32, borderRadius: 6, background: AMBER, color: "#111", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 900, fontSize: 17, marginBottom: 8 }}>{item.l}</div>
-            <p style={{ color: WARM, fontWeight: 800, fontSize: 13, margin: "0 0 4px", textTransform: "uppercase", letterSpacing: 0.5 }}>{item.w}</p>
-            <p style={{ color: "#666", fontSize: 12, lineHeight: 1.5, margin: 0 }}>{item.d}</p>
+          <div key={i} style={{ background: "#fff", border: "1px solid #2C2C2C", borderRadius: 10, padding: 14 }}>
+            <div style={{ width: 32, height: 32, borderRadius: 6, background: AMBER, color: NAVY, display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 900, fontSize: 17, marginBottom: 8 }}>{item.l}</div>
+            <p style={{ color: NAVY, fontWeight: 800, fontSize: 13, margin: "0 0 4px", textTransform: "uppercase", letterSpacing: 0.5 }}>{item.w}</p>
+            <p style={{ color: "#444", fontSize: 12, lineHeight: 1.5, margin: 0 }}>{item.d}</p>
           </div>
         ))}
       </div>
       <Callout text="Use 'I' not 'we'. Your panel is assessing you — not your group or team. Describe specifically what YOU did and what difference YOUR actions made." type="warning" />
-      <p style={{ color: WARM, fontWeight: 800, fontSize: 13, margin: "16px 0 10px", textTransform: "uppercase", letterSpacing: 0.5 }}>Worked examples — three tiers</p>
+      <p style={{ color: NAVY, fontWeight: 800, fontSize: 13, margin: "16px 0 10px", textTransform: "uppercase", letterSpacing: 0.5 }}>Worked examples — three tiers</p>
       <TabBar options={STAR_EXAMPLES.map((e, i) => ({ id: i, label: e.label }))} active={active} onSelect={(id) => { setActive(id); setTier("strong"); }} />
       <Card>
-        <p style={{ color: "#555", fontSize: 11, textTransform: "uppercase", letterSpacing: 0.5, margin: "0 0 5px" }}>Interview question</p>
-        <p style={{ color: WARM, fontWeight: 800, fontSize: 15, margin: 0 }}>"{ex.question}"</p>
+        <p style={{ color: "#444", fontSize: 11, textTransform: "uppercase", letterSpacing: 0.5, margin: "0 0 5px" }}>Interview question</p>
+        <p style={{ color: NAVY, fontWeight: 800, fontSize: 15, margin: 0 }}>"{ex.question}"</p>
       </Card>
       <div style={{ display: "flex", gap: 6, marginBottom: 12 }}>
         {["weak","good","strong"].map(t => (
@@ -434,9 +491,9 @@ function STARModule() {
       </div>
       <div style={{ background: tierBg[tier], border: `1px solid ${tierCol[tier]}30`, borderLeft: `3px solid ${tierCol[tier]}`, borderRadius: 10, padding: 14, marginBottom: 12 }}>
         <p style={{ color: tierCol[tier], fontWeight: 800, fontSize: 11, textTransform: "uppercase", margin: "0 0 8px" }}>{tier === "weak" ? "✗ Weak" : tier === "good" ? "◎ Good" : "✓ Strong"} answer</p>
-        <p style={{ color: "#CCC", fontSize: 14, lineHeight: 1.75, margin: 0, fontStyle: "italic" }}>"{ex[tier]}"</p>
+        <p style={{ color: "#333", fontSize: 14, lineHeight: 1.75, margin: 0, fontStyle: "italic" }}>"{ex[tier]}"</p>
       </div>
-      <div style={{ background: "#0D1B2E", borderLeft: `3px solid ${TEAL}`, borderRadius: 8, padding: 12, marginBottom: 16 }}>
+      <div style={{ background: "#EFF6FF", borderLeft: `3px solid ${TEAL}`, borderRadius: 8, padding: 12, marginBottom: 16 }}>
         <p style={{ color: TEAL, fontWeight: 700, fontSize: 11, textTransform: "uppercase", margin: "0 0 4px" }}>Coach commentary</p>
         <p style={{ color: "#8CC", fontSize: 13, lineHeight: 1.65, margin: 0 }}>{ex.why}</p>
       </div>
@@ -445,10 +502,10 @@ function STARModule() {
         {[{ label:"S — Situation", ph:"Where were you? When? What was happening?" }, { label:"T — Task", ph:"What was your specific responsibility?" }, { label:"A — Action", ph:"What did YOU do? (Use 'I', not 'we')" }, { label:"R — Result", ph:"What happened? What did you learn? Can you quantify it?" }].map((f, i) => (
           <div key={i} style={{ marginBottom: 10 }}>
             <p style={{ color: AMBER, fontSize: 12, fontWeight: 700, margin: "0 0 4px", textTransform: "uppercase" }}>{f.label}</p>
-            <textarea rows={2} placeholder={f.ph} style={{ width: "100%", background: "#111", border: "1px solid #2C2C2C", borderRadius: 8, padding: 10, color: WARM, fontSize: 13, fontFamily: "inherit", resize: "none", boxSizing: "border-box" }} />
+            <textarea rows={2} placeholder={f.ph} style={{ width: "100%", background: "#F8FAFC", border: "1px solid #2C2C2C", borderRadius: 8, padding: 10, color: NAVY, fontSize: 13, fontFamily: "inherit", resize: "none", boxSizing: "border-box" }} />
           </div>
         ))}
-        <p style={{ color: "#555", fontSize: 12, margin: "4px 0 0" }}>💡 Paste into the AI Coach for feedback.</p>
+        <p style={{ color: "#444", fontSize: 12, margin: "4px 0 0" }}>💡 Paste into the AI Coach for feedback.</p>
       </Card>
     </div>
   );
@@ -464,9 +521,9 @@ function InterviewModule() {
       <Callout text="Construction employers care about attitude and potential as much as experience. Show you understand safety culture, can take instruction, and are genuinely motivated." type="tip" />
       <TabBar options={INTERVIEW_QS.map((_, i) => ({ id: i, label: `Q${i+1}` }))} active={current} onSelect={(id) => { setCurrent(id); setReveal(null); }} />
       <Card>
-        <p style={{ color: "#555", fontSize: 11, textTransform: "uppercase", margin: "0 0 5px" }}>Interview question</p>
-        <p style={{ color: WARM, fontWeight: 800, fontSize: 15, margin: "0 0 12px" }}>"{q.q}"</p>
-        <div style={{ background: "#0D1B0D", borderLeft: `3px solid ${TEAL}`, borderRadius: 8, padding: "9px 11px" }}>
+        <p style={{ color: "#444", fontSize: 11, textTransform: "uppercase", margin: "0 0 5px" }}>Interview question</p>
+        <p style={{ color: NAVY, fontWeight: 800, fontSize: 15, margin: "0 0 12px" }}>"{q.q}"</p>
+        <div style={{ background: "#F0FDF4", borderLeft: `3px solid ${TEAL}`, borderRadius: 8, padding: "9px 11px" }}>
           <p style={{ color: "#8CC", fontSize: 13, lineHeight: 1.6, margin: 0 }}>💡 <strong style={{ color: TEAL }}>Tip:</strong> {q.tip}</p>
         </div>
       </Card>
@@ -474,12 +531,12 @@ function InterviewModule() {
         <button onClick={() => setReveal(reveal === "strong" ? null : "strong")} style={{ flex: 1, padding: 10, background: reveal === "strong" ? GREEN : "#1A1A1A", border: `2px solid ${GREEN}`, color: reveal === "strong" ? "#fff" : GREEN, borderRadius: 8, fontWeight: 700, fontSize: 12, cursor: "pointer", fontFamily: "inherit", textTransform: "uppercase" }}>{reveal === "strong" ? "Hide" : "✓ Strong"}</button>
         <button onClick={() => setReveal(reveal === "weak" ? null : "weak")} style={{ flex: 1, padding: 10, background: reveal === "weak" ? RUST : "#1A1A1A", border: `2px solid ${RUST}`, color: reveal === "weak" ? "#fff" : RUST, borderRadius: 8, fontWeight: 700, fontSize: 12, cursor: "pointer", fontFamily: "inherit", textTransform: "uppercase" }}>{reveal === "weak" ? "Hide" : "✗ Weak"}</button>
       </div>
-      {reveal === "strong" && <div style={{ background: "#0A1A0A", border: `1px solid ${GREEN}30`, borderLeft: `3px solid ${GREEN}`, borderRadius: 10, padding: 14, marginBottom: 12 }}><p style={{ color: GREEN, fontWeight: 700, fontSize: 11, textTransform: "uppercase", margin: "0 0 8px" }}>✓ Strong Answer</p><p style={{ color: "#CCC", fontSize: 14, lineHeight: 1.7, margin: 0 }}>{q.strong}</p></div>}
-      {reveal === "weak" && <div style={{ background: "#1A0A0A", border: `1px solid ${RUST}30`, borderLeft: `3px solid ${RUST}`, borderRadius: 10, padding: 14, marginBottom: 12 }}><p style={{ color: RUST, fontWeight: 700, fontSize: 11, textTransform: "uppercase", margin: "0 0 8px" }}>✗ Weak Answer</p><p style={{ color: "#AAA", fontSize: 14, lineHeight: 1.7, margin: 0 }}>{q.weak}</p></div>}
+      {reveal === "strong" && <div style={{ background: "#F0FDF4", border: `1px solid ${GREEN}30`, borderLeft: `3px solid ${GREEN}`, borderRadius: 10, padding: 14, marginBottom: 12 }}><p style={{ color: GREEN, fontWeight: 700, fontSize: 11, textTransform: "uppercase", margin: "0 0 8px" }}>✓ Strong Answer</p><p style={{ color: "#333", fontSize: 14, lineHeight: 1.7, margin: 0 }}>{q.strong}</p></div>}
+      {reveal === "weak" && <div style={{ background: "#FEF2F2", border: `1px solid ${RUST}30`, borderLeft: `3px solid ${RUST}`, borderRadius: 10, padding: 14, marginBottom: 12 }}><p style={{ color: RUST, fontWeight: 700, fontSize: 11, textTransform: "uppercase", margin: "0 0 8px" }}>✗ Weak Answer</p><p style={{ color: "#444", fontSize: 14, lineHeight: 1.7, margin: 0 }}>{q.weak}</p></div>}
       <Card>
         <p style={{ color: TEAL, fontWeight: 700, fontSize: 12, margin: "0 0 8px", textTransform: "uppercase" }}>🎤 Practise your answer</p>
-        <textarea placeholder="Type your answer using the STAR method..." rows={4} style={{ width: "100%", background: "#111", border: "1px solid #2C2C2C", borderRadius: 8, padding: 12, color: WARM, fontSize: 13, fontFamily: "inherit", resize: "vertical", boxSizing: "border-box" }} />
-        <p style={{ color: "#555", fontSize: 12, marginTop: 8, marginBottom: 0 }}>💡 Paste into the AI Coach for feedback.</p>
+        <textarea placeholder="Type your answer using the STAR method..." rows={4} style={{ width: "100%", background: "#F8FAFC", border: "1px solid #2C2C2C", borderRadius: 8, padding: 12, color: NAVY, fontSize: 13, fontFamily: "inherit", resize: "vertical", boxSizing: "border-box" }} />
+        <p style={{ color: "#444", fontSize: 12, marginTop: 8, marginBottom: 0 }}>💡 Paste into the AI Coach for feedback.</p>
       </Card>
     </div>
   );
@@ -501,7 +558,7 @@ function TechnicalModule() {
       <div style={{ display: "flex", flexWrap: "wrap", gap: 6, marginBottom: 14 }}>
         {TRADES.map(t => (
           <button key={t.id} onClick={() => { setTrade(t.id); setState({}); }}
-            style={{ background: trade === t.id ? AMBER : "#1A1A1A", color: trade === t.id ? "#111" : "#777", border: `1px solid ${trade === t.id ? AMBER : "#2C2C2C"}`, borderRadius: 20, padding: "6px 11px", fontSize: 11, fontWeight: trade === t.id ? 800 : 400, cursor: "pointer", fontFamily: "inherit", textTransform: "uppercase", letterSpacing: 0.3 }}>
+            style={{ background: trade === t.id ? AMBER : "#1A1A1A", color: trade === t.id ? "#111" : "#777", border: `1px solid ${trade === t.id ? AMBER : "#E2E8F0"}`, borderRadius: 20, padding: "6px 11px", fontSize: 11, fontWeight: trade === t.id ? 800 : 400, cursor: "pointer", fontFamily: "inherit", textTransform: "uppercase", letterSpacing: 0.3 }}>
             {t.icon} {t.label.split(" ")[0]}
           </button>
         ))}
@@ -512,8 +569,8 @@ function TechnicalModule() {
         const answered = state[key] !== undefined;
         const correctIdx = q.opts.indexOf(q.a);
         return (
-          <div key={i} style={{ background: "#1A1A1A", border: "1px solid #2C2C2C", borderRadius: 10, padding: 15, marginBottom: 12 }}>
-            <p style={{ color: WARM, fontWeight: 700, fontSize: 14, lineHeight: 1.55, margin: "0 0 12px" }}>{i + 1}. {q.q}</p>
+          <div key={i} style={{ background: "#fff", border: "1px solid #2C2C2C", borderRadius: 10, padding: 15, marginBottom: 12 }}>
+            <p style={{ color: NAVY, fontWeight: 700, fontSize: 14, lineHeight: 1.55, margin: "0 0 12px" }}>{i + 1}. {q.q}</p>
             <div style={{ display: "flex", flexDirection: "column", gap: 7 }}>
               {q.opts.map((opt, j) => {
                 let bg = "#111", border = "1px solid #2C2C2C", col = "#777";
@@ -530,7 +587,7 @@ function TechnicalModule() {
               })}
             </div>
             {answered && (
-              <div style={{ marginTop: 10, background: "#0D1B2E", borderLeft: `3px solid ${TEAL}`, borderRadius: 8, padding: "9px 12px" }}>
+              <div style={{ marginTop: 10, background: "#EFF6FF", borderLeft: `3px solid ${TEAL}`, borderRadius: 8, padding: "9px 12px" }}>
                 <p style={{ color: state[key] === correctIdx ? GREEN : RUST, fontWeight: 700, fontSize: 11, margin: "0 0 4px", textTransform: "uppercase" }}>
                   {state[key] === correctIdx ? "✅ Correct" : `✗ Incorrect — answer: ${q.a}`}
                 </p>
@@ -568,12 +625,12 @@ function CITBModule() {
   if (done) return (
     <div>
       <SectionHeader icon="🦺" title="CITB Practice Test" subtitle="Health, Safety and Environment — 12 practice questions." />
-      <div style={{ background: "#1A1A1A", borderRadius: 14, padding: 28, textAlign: "center", border: `2px solid ${pct >= 90 ? GREEN : pct >= 70 ? AMBER : RUST}` }}>
+      <div style={{ background: "#fff", borderRadius: 14, padding: 28, textAlign: "center", border: `2px solid ${pct >= 90 ? GREEN : pct >= 70 ? AMBER : RUST}` }}>
         <div style={{ fontSize: 48, marginBottom: 12 }}>{pct >= 90 ? "🏆" : pct >= 70 ? "💪" : "📖"}</div>
         <p style={{ color: pct >= 90 ? GREEN : pct >= 70 ? AMBER : RUST, fontWeight: 900, fontSize: 24, margin: "0 0 6px", textTransform: "uppercase" }}>{score} / {CITB_QUESTIONS.length}</p>
-        <p style={{ color: "#888", fontSize: 14, marginBottom: 16 }}>{pct >= 90 ? "Excellent — you are at or above the 90% pass mark." : pct >= 70 ? "Good foundation — review the questions you got wrong." : "More preparation needed — work through the CITB GT100 guide and try again."}</p>
+        <p style={{ color: "#444", fontSize: 14, marginBottom: 16 }}>{pct >= 90 ? "Excellent — you are at or above the 90% pass mark." : pct >= 70 ? "Good foundation — review the questions you got wrong." : "More preparation needed — work through the CITB GT100 guide and try again."}</p>
         <p style={{ color: AMBER, fontSize: 13, fontWeight: 700, margin: "0 0 20px" }}>Real test: 50 questions, 90% required to pass (45/50).</p>
-        <button onClick={restart} style={{ padding: "12px 28px", background: AMBER, border: "none", color: "#111", borderRadius: 8, fontWeight: 800, cursor: "pointer", fontSize: 14, fontFamily: "inherit", textTransform: "uppercase" }}>Try again</button>
+        <button onClick={restart} style={{ padding: "12px 28px", background: AMBER, border: "none", color: NAVY, borderRadius: 8, fontWeight: 800, cursor: "pointer", fontSize: 14, fontFamily: "inherit", textTransform: "uppercase" }}>Try again</button>
       </div>
     </div>
   );
@@ -583,15 +640,15 @@ function CITBModule() {
       <SectionHeader icon="🦺" title="CITB HS&E Practice" subtitle="Health, Safety and Environment test — same format as the real exam." />
       <Callout text="The real CITB test: 50 questions, 90% pass mark (45/50). Download the free CITB GT100 guide and use the CITB revision app alongside this practice." type="tip" />
       <div style={{ marginBottom: 14 }}>
-        <div style={{ display: "flex", justifyContent: "space-between", fontSize: 12, color: "#555", marginBottom: 6 }}>
+        <div style={{ display: "flex", justifyContent: "space-between", fontSize: 12, color: "#444", marginBottom: 6 }}>
           <span style={{ textTransform: "uppercase", letterSpacing: 0.5 }}>Question {qIdx + 1} of {CITB_QUESTIONS.length}</span>
           <span style={{ color: AMBER, fontWeight: 700 }}>Score: {score}</span>
         </div>
-        <div style={{ background: "#111", borderRadius: 99, height: 5 }}>
+        <div style={{ background: "#F8FAFC", borderRadius: 99, height: 5 }}>
           <div style={{ background: AMBER, height: 5, borderRadius: 99, width: `${(qIdx / CITB_QUESTIONS.length) * 100}%`, transition: "width 0.3s" }} />
         </div>
       </div>
-      <Card><p style={{ color: WARM, fontWeight: 700, fontSize: 15, lineHeight: 1.55, margin: 0 }}>{q.q}</p></Card>
+      <Card><p style={{ color: NAVY, fontWeight: 700, fontSize: 15, lineHeight: 1.55, margin: 0 }}>{q.q}</p></Card>
       <div style={{ display: "flex", flexDirection: "column", gap: 8, marginBottom: 12 }}>
         {q.opts.map((opt, i) => {
           let bg = "#111", border = "1px solid #2C2C2C", col = "#777";
@@ -611,9 +668,9 @@ function CITBModule() {
         <>
           <div style={{ background: answered === q.correct ? "#0A1A0A" : "#1A0A0A", border: `1px solid ${answered === q.correct ? GREEN : RUST}30`, borderRadius: 10, padding: 13, marginBottom: 12 }}>
             <p style={{ color: answered === q.correct ? GREEN : RUST, fontWeight: 700, fontSize: 12, margin: "0 0 6px", textTransform: "uppercase" }}>{answered === q.correct ? "✅ Correct" : "✗ Incorrect"}</p>
-            <p style={{ color: "#AAA", fontSize: 13, lineHeight: 1.65, margin: 0 }}>{q.explain}</p>
+            <p style={{ color: "#444", fontSize: 13, lineHeight: 1.65, margin: 0 }}>{q.explain}</p>
           </div>
-          <button onClick={next} style={{ width: "100%", padding: 14, background: AMBER, border: "none", color: "#111", borderRadius: 10, fontWeight: 800, cursor: "pointer", fontSize: 14, fontFamily: "inherit", textTransform: "uppercase" }}>
+          <button onClick={next} style={{ width: "100%", padding: 14, background: AMBER, border: "none", color: NAVY, borderRadius: 10, fontWeight: 800, cursor: "pointer", fontSize: 14, fontFamily: "inherit", textTransform: "uppercase" }}>
             {qIdx + 1 >= CITB_QUESTIONS.length ? "See results" : "Next question →"}
           </button>
         </>
@@ -636,20 +693,20 @@ function CaseStudiesModule() {
               <span style={{ color: active === i ? WARM : "#777", fontWeight: 700, fontSize: 13 }}>{cs.name}, {cs.age}</span>
               <span style={{ fontSize: 12, color: active === i ? AMBER : "#555" }}>{cs.outcomeIcon}</span>
             </div>
-            <span style={{ color: "#555", fontSize: 11 }}>#{cs.tag}</span>
+            <span style={{ color: "#444", fontSize: 11 }}>#{cs.tag}</span>
           </button>
         ))}
       </div>
       <Card>
         <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 12 }}>
           <div>
-            <p style={{ color: WARM, fontWeight: 900, fontSize: 17, margin: "0 0 3px" }}>{c.name}, {c.age}</p>
+            <p style={{ color: NAVY, fontWeight: 900, fontSize: 17, margin: "0 0 3px" }}>{c.name}, {c.age}</p>
             <p style={{ color: AMBER, fontSize: 13, fontWeight: 700, margin: 0 }}>{c.outcomeIcon} {c.outcome}</p>
           </div>
-          <span style={{ background: "#2C2C2C", color: "#666", fontSize: 11, padding: "4px 10px", borderRadius: 20, fontWeight: 700, alignSelf: "flex-start" }}>#{c.tag}</span>
+          <span style={{ background: "#E2E8F0", color: "#444", fontSize: 11, padding: "4px 10px", borderRadius: 20, fontWeight: 700, alignSelf: "flex-start" }}>#{c.tag}</span>
         </div>
-        <p style={{ color: "#AAA", fontSize: 14, lineHeight: 1.75, marginBottom: 14 }}>{c.story}</p>
-        <div style={{ background: "#0D1B2E", borderLeft: `4px solid ${TEAL}`, borderRadius: 8, padding: 12 }}>
+        <p style={{ color: "#444", fontSize: 14, lineHeight: 1.75, marginBottom: 14 }}>{c.story}</p>
+        <div style={{ background: "#EFF6FF", borderLeft: `4px solid ${TEAL}`, borderRadius: 8, padding: 12 }}>
           <p style={{ color: TEAL, fontWeight: 700, fontSize: 11, textTransform: "uppercase", margin: "0 0 4px" }}>📌 Key lesson</p>
           <p style={{ color: "#8CC", fontSize: 13, lineHeight: 1.65, margin: 0 }}>{c.lesson}</p>
         </div>
@@ -676,22 +733,22 @@ function RoadmapModule() {
       </div>
       <Card>
         <p style={{ color: AMBER, fontWeight: 900, fontSize: 14, margin: "0 0 4px", textTransform: "uppercase" }}>{phase.phase}</p>
-        <p style={{ color: "#555", fontSize: 12, margin: "0 0 12px", fontWeight: 700 }}>{phase.weeks}</p>
+        <p style={{ color: "#444", fontSize: 12, margin: "0 0 12px", fontWeight: 700 }}>{phase.weeks}</p>
         {phase.tasks.map((task, i) => (
           <div key={i} style={{ display: "flex", gap: 10, marginBottom: 10, alignItems: "flex-start" }}>
             <div style={{ width: 18, height: 18, borderRadius: 4, border: `2px solid ${AMBER}`, flexShrink: 0, marginTop: 2 }} />
-            <span style={{ color: "#AAA", fontSize: 14, lineHeight: 1.55 }}>{task}</span>
+            <span style={{ color: "#444", fontSize: 14, lineHeight: 1.55 }}>{task}</span>
           </div>
         ))}
       </Card>
       <Card>
         <p style={{ color: TEAL, fontWeight: 700, fontSize: 12, margin: "0 0 10px", textTransform: "uppercase" }}>Interview day — do and don't</p>
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
-          <div style={{ background: "#0A1A0A", borderRadius: 8, padding: 12 }}>
+          <div style={{ background: "#F0FDF4", borderRadius: 8, padding: 12 }}>
             <p style={{ color: GREEN, fontWeight: 700, fontSize: 11, margin: "0 0 8px", textTransform: "uppercase" }}>✓ Do</p>
             {["Arrive 10–15 minutes early", "Wear smart, clean clothing", "Bring ID and certificates", "Ask at least 2 questions", "Make eye contact and engage"].map((t, i) => <p key={i} style={{ color: "#7A9", fontSize: 12, margin: "0 0 4px" }}>• {t}</p>)}
           </div>
-          <div style={{ background: "#1A0A0A", borderRadius: 8, padding: 12 }}>
+          <div style={{ background: "#FEF2F2", borderRadius: 8, padding: 12 }}>
             <p style={{ color: RUST, fontWeight: 700, fontSize: 11, margin: "0 0 8px", textTransform: "uppercase" }}>✗ Don't</p>
             {["Arrive late or unprepared", "Use casual or slang language", "Badmouth past employers", "Leave without asking anything", "Give yes/no answers only"].map((t, i) => <p key={i} style={{ color: "#A77", fontSize: 12, margin: "0 0 4px" }}>• {t}</p>)}
           </div>
@@ -715,13 +772,13 @@ function EDIModule() {
     <div>
       <SectionHeader icon="🤝" title="EDI and Your Rights" subtitle="Equality, inclusion and what you are legally entitled to during the recruitment process." />
       {items.map((item, i) => (
-        <div key={i} style={{ background: "#1A1A1A", border: `1px solid ${open === i ? TEAL : "#2C2C2C"}`, borderRadius: 10, overflow: "hidden", marginBottom: 10 }}>
+        <div key={i} style={{ background: "#fff", border: `1px solid ${open === i ? TEAL : "#E2E8F0"}`, borderRadius: 10, overflow: "hidden", marginBottom: 10 }}>
           <button onClick={() => setOpen(open === i ? null : i)}
             style={{ width: "100%", background: "none", border: "none", padding: "13px 15px", display: "flex", justifyContent: "space-between", alignItems: "center", cursor: "pointer", fontFamily: "inherit" }}>
-            <span style={{ color: WARM, fontWeight: 700, fontSize: 14, textAlign: "left" }}>{item.title}</span>
+            <span style={{ color: NAVY, fontWeight: 700, fontSize: 14, textAlign: "left" }}>{item.title}</span>
             <span style={{ color: TEAL, fontSize: 20, flexShrink: 0 }}>{open === i ? "−" : "+"}</span>
           </button>
-          {open === i && <div style={{ padding: "0 15px 15px", borderTop: "1px solid #2C2C2C" }}><p style={{ color: "#AAA", fontSize: 13, lineHeight: 1.75, margin: "12px 0 0", whiteSpace: "pre-line" }}>{item.content}</p></div>}
+          {open === i && <div style={{ padding: "0 15px 15px", borderTop: "1px solid #E2E8F0" }}><p style={{ color: "#444", fontSize: 13, lineHeight: 1.75, margin: "12px 0 0", whiteSpace: "pre-line" }}>{item.content}</p></div>}
         </div>
       ))}
     </div>
@@ -766,26 +823,26 @@ function CoachModule() {
 
   return (
     <div style={{ display: "flex", flexDirection: "column", height: "calc(100vh - 200px)", minHeight: 400 }}>
-      <div style={{ background: "#0D1B2E", borderLeft: `3px solid ${TEAL}`, borderRadius: 8, padding: "9px 13px", marginBottom: 10 }}>
+      <div style={{ background: "#EFF6FF", borderLeft: `3px solid ${TEAL}`, borderRadius: 8, padding: "9px 13px", marginBottom: 10 }}>
         <p style={{ color: "#8CC", fontSize: 13, margin: 0 }}>💡 Try a mock interview, get STAR feedback, or paste your personal statement for a review.</p>
       </div>
       <div style={{ display: "flex", gap: 6, marginBottom: 10, overflowX: "auto", paddingBottom: 4 }}>
-        {PROMPTS.map((p, i) => <button key={i} onClick={() => setInput(p)} style={{ background: AMBER + "15", border: `1px solid ${AMBER}40`, color: AMBER, borderRadius: 99, padding: "5px 11px", whiteSpace: "nowrap", fontSize: 11, fontWeight: 600, cursor: "pointer", flexShrink: 0, fontFamily: "inherit" }}>{p}</button>)}
+        {PROMPTS.map((p, i) => <button key={i} onClick={() => setInput(p)} style={{ background: TEAL + "15", border: `1px solid ${TEAL}40`, color: TEAL, borderRadius: 99, padding: "5px 11px", whiteSpace: "nowrap", fontSize: 11, fontWeight: 600, cursor: "pointer", flexShrink: 0, fontFamily: "inherit" }}>{p}</button>)}
       </div>
       <div style={{ flex: 1, overflowY: "auto", display: "flex", flexDirection: "column", gap: 10, paddingRight: 4 }}>
         {messages.map((m, i) => (
           <div key={i} style={{ display: "flex", justifyContent: m.role === "user" ? "flex-end" : "flex-start" }}>
-            <div style={{ maxWidth: "85%", padding: "10px 14px", borderRadius: m.role === "user" ? "14px 14px 4px 14px" : "14px 14px 14px 4px", background: m.role === "user" ? AMBER : "#1A1A1A", color: m.role === "user" ? "#111" : "#CCC", fontSize: 14, lineHeight: 1.7, whiteSpace: "pre-wrap", border: m.role === "assistant" ? "1px solid #2C2C2C" : "none" }}>
+            <div style={{ maxWidth: "85%", padding: "10px 14px", borderRadius: m.role === "user" ? "14px 14px 4px 14px" : "14px 14px 14px 4px", background: m.role === "user" ? NAVY : "#fff", color: m.role === "user" ? "#fff" : NAVY, fontSize: 14, lineHeight: 1.7, whiteSpace: "pre-wrap", border: m.role === "assistant" ? "1px solid #E2E8F0" : "none", boxShadow: m.role === "assistant" ? "0 1px 4px rgba(0,0,0,0.06)" : "none" }}>
               {m.content}
             </div>
           </div>
         ))}
-        {loading && <div style={{ display: "flex", justifyContent: "flex-start" }}><div style={{ background: "#1A1A1A", border: "1px solid #2C2C2C", borderRadius: "14px 14px 14px 4px", padding: "11px 15px" }}><div style={{ display: "flex", gap: 4 }}>{[0,1,2].map(i => <div key={i} style={{ width: 6, height: 6, background: AMBER, borderRadius: 99, animation: `b 1.2s ${i*0.2}s infinite` }} />)}</div></div></div>}
+        {loading && <div style={{ display: "flex", justifyContent: "flex-start" }}><div style={{ background: "#fff", border: "1px solid #2C2C2C", borderRadius: "14px 14px 14px 4px", padding: "11px 15px" }}><div style={{ display: "flex", gap: 4 }}>{[0,1,2].map(i => <div key={i} style={{ width: 6, height: 6, background: TEAL, borderRadius: 99, animation: `b 1.2s ${i*0.2}s infinite` }} />)}</div></div></div>}
         <div ref={bottomRef} />
       </div>
       <div style={{ display: "flex", gap: 8, marginTop: 10 }}>
-        <textarea value={input} onChange={e => setInput(e.target.value)} onKeyDown={e => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); send(); } }} placeholder="Ask your coach anything, or paste your statement or STAR answer for feedback..." rows={2} style={{ flex: 1, background: "#1A1A1A", border: "1px solid #2C2C2C", borderRadius: 10, padding: "10px 13px", color: WARM, fontSize: 14, fontFamily: "inherit", resize: "none", minHeight: 50, boxSizing: "border-box" }} />
-        <button onClick={send} disabled={loading || !input.trim()} style={{ background: input.trim() ? AMBER : "#1A1A1A", border: "none", color: input.trim() ? "#111" : "#444", borderRadius: 10, padding: "0 16px", cursor: input.trim() ? "pointer" : "default", fontSize: 20 }}>↑</button>
+        <textarea value={input} onChange={e => setInput(e.target.value)} onKeyDown={e => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); send(); } }} placeholder="Ask your coach anything, or paste your statement or STAR answer for feedback..." rows={2} style={{ flex: 1, background: "#fff", border: "1px solid #2C2C2C", borderRadius: 10, padding: "10px 13px", color: NAVY, fontSize: 14, fontFamily: "inherit", resize: "none", minHeight: 50, boxSizing: "border-box" }} />
+        <button onClick={send} disabled={loading || !input.trim()} style={{ background: input.trim() ? TEAL : "#E2E8F0", border: "none", color: input.trim() ? "#fff" : "#999", borderRadius: 10, padding: "0 16px", cursor: input.trim() ? "pointer" : "default", fontSize: 20 }}>↑</button>
       </div>
       <style>{`@keyframes b{0%,80%,100%{transform:translateY(0)}40%{transform:translateY(-5px)}}`}</style>
     </div>
@@ -812,24 +869,24 @@ function HomeModule({ setTab }) {
       <div style={{ display: "flex", justifyContent: "center", padding: "28px 0 24px" }}>
         <TASSLogo size="lg" theme="dark" />
       </div>
-      <div style={{ height: 8, background: `repeating-linear-gradient(45deg, ${AMBER}, ${AMBER} 10px, #111 10px, #111 20px)`, borderRadius: 4, marginBottom: 20 }} />
-      <div style={{ background: "#1A1A1A", border: `1px solid ${AMBER}30`, borderLeft: `4px solid ${AMBER}`, borderRadius: 10, padding: 14, marginBottom: 16 }}>
-        <p style={{ color: "#666", fontSize: 11, margin: "0 0 4px", textTransform: "uppercase", letterSpacing: 0.5, fontWeight: 700 }}>Construction and Trades</p>
-        <p style={{ color: WARM, fontSize: 14, lineHeight: 1.65, margin: 0 }}>A full-depth preparation module for construction trade apprenticeships in Scotland. Covers all 8 trades, CITB test prep, STAR method, CV building, technical questions and real candidate stories.</p>
+      <div style={{ height: 8, background: `repeating-linear-gradient(45deg, ${AMBER}, ${AMBER} 10px, #E2E8F0 10px, #E2E8F0 20px)`, borderRadius: 4, marginBottom: 20 }} />
+      <div style={{ background: "#fff", border: `1px solid ${AMBER}30`, borderLeft: `4px solid ${AMBER}`, borderRadius: 10, padding: 14, marginBottom: 16 }}>
+        <p style={{ color: "#444", fontSize: 11, margin: "0 0 4px", textTransform: "uppercase", letterSpacing: 0.5, fontWeight: 700 }}>Construction and Trades</p>
+        <p style={{ color: NAVY, fontSize: 14, lineHeight: 1.65, margin: 0 }}>A full-depth preparation module for construction trade apprenticeships in Scotland. Covers all 8 trades, CITB test prep, STAR method, CV building, technical questions and real candidate stories.</p>
       </div>
-      <div style={{ background: "#111", border: `1px solid #2C2C2C`, borderLeft: `4px solid ${TEAL}`, borderRadius: 10, padding: 14, marginBottom: 20 }}>
+      <div style={{ background: "#F8FAFC", border: `1px solid #2C2C2C`, borderLeft: `4px solid ${TEAL}`, borderRadius: 10, padding: 14, marginBottom: 20 }}>
         <p style={{ color: TEAL, fontWeight: 800, fontSize: 12, margin: "0 0 4px", textTransform: "uppercase" }}>Start here</p>
-        <p style={{ color: "#777", fontSize: 13, lineHeight: 1.65, margin: 0 }}>Read <strong style={{ color: WARM }}>Sector Overview</strong> and <strong style={{ color: WARM }}>Pathways</strong> first. Then build your CV and STAR answers. Use the AI Coach to practise at any stage.</p>
+        <p style={{ color: "#444", fontSize: 13, lineHeight: 1.65, margin: 0 }}>Read <strong style={{ color: NAVY }}>Sector Overview</strong> and <strong style={{ color: NAVY }}>Pathways</strong> first. Then build your CV and STAR answers. Use the AI Coach to practise at any stage.</p>
       </div>
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, marginBottom: 24 }}>
         {cards.map((card, i) => (
           <button key={i} onClick={() => setTab(card.id)}
-            style={{ background: "#111", border: "1px solid #2C2C2C", borderRadius: 12, padding: "14px 12px", textAlign: "left", cursor: "pointer", fontFamily: "inherit" }}
+            style={{ background: "#F8FAFC", border: "1px solid #2C2C2C", borderRadius: 12, padding: "14px 12px", textAlign: "left", cursor: "pointer", fontFamily: "inherit" }}
             onMouseEnter={e => { e.currentTarget.style.borderColor = AMBER; }}
-            onMouseLeave={e => { e.currentTarget.style.borderColor = "#2C2C2C"; }}>
+            onMouseLeave={e => { e.currentTarget.style.borderColor = "#E2E8F0"; }}>
             <div style={{ fontSize: 20, marginBottom: 6 }}>{card.icon}</div>
-            <p style={{ color: WARM, fontWeight: 700, fontSize: 13, margin: "0 0 3px", lineHeight: 1.3 }}>{card.title}</p>
-            <p style={{ color: "#555", fontSize: 11, lineHeight: 1.4, margin: 0 }}>{card.desc}</p>
+            <p style={{ color: NAVY, fontWeight: 700, fontSize: 13, margin: "0 0 3px", lineHeight: 1.3 }}>{card.title}</p>
+            <p style={{ color: "#444", fontSize: 11, lineHeight: 1.4, margin: 0 }}>{card.desc}</p>
           </button>
         ))}
       </div>
@@ -844,15 +901,15 @@ export default function TASSConstruction() {
   const [tab, setTab] = useState("home");
   const currentTab = MODULES.find(t => t.id === tab);
   return (
-    <div style={{ fontFamily: "'Segoe UI', system-ui, sans-serif", background: CONCRETE, minHeight: "100vh", color: WARM }}>
-      <style>{`* { box-sizing: border-box; } ::-webkit-scrollbar { width: 4px; } ::-webkit-scrollbar-track { background: ${CONCRETE}; } ::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; } textarea:focus, button:focus { outline: 2px solid ${AMBER}; outline-offset: 2px; }`}</style>
+    <div style={{ fontFamily: "'Segoe UI', system-ui, sans-serif", background: "#F5F7FA", minHeight: "100vh", color: NAVY }}>
+      <style>{`* { box-sizing: border-box; } ::-webkit-scrollbar { width: 4px; } ::-webkit-scrollbar-track { background: ${CONCRETE}; } ::-webkit-scrollbar-thumb { background: #D1D9E6; border-radius: 4px; } textarea:focus, button:focus { outline: 2px solid ${AMBER}; outline-offset: 2px; }`}</style>
       {tab !== "home" && (
-        <div style={{ background: "#111", borderBottom: `2px solid ${AMBER}30`, padding: "12px 16px", display: "flex", alignItems: "center", gap: 12, position: "sticky", top: 0, zIndex: 100 }}>
+        <div style={{ background: `linear-gradient(135deg, #0D1B3E 0%, #1A3060 100%)`, borderBottom: "none", padding: "12px 16px", display: "flex", alignItems: "center", gap: 12, position: "sticky", top: 0, zIndex: 100 }}>
           <TASSLogo size="sm" theme="dark" />
-          <div style={{ width: 1, height: 32, background: "#2C2C2C", margin: "0 4px" }} />
+          <div style={{ width: 1, height: 32, background: "#E2E8F0", margin: "0 4px" }} />
           <div style={{ flex: 1 }}>
-            <div style={{ color: WARM, fontWeight: 700, fontSize: 12, lineHeight: 1, textTransform: "uppercase", letterSpacing: 0.5 }}>Construction and Trades</div>
-            <div style={{ color: "#555", fontSize: 11, marginTop: 2 }}>{currentTab?.icon} {currentTab?.label}</div>
+            <div style={{ color: NAVY, fontWeight: 700, fontSize: 12, lineHeight: 1, textTransform: "uppercase", letterSpacing: 0.5 }}>Construction and Trades</div>
+            <div style={{ color: "#444", fontSize: 11, marginTop: 2 }}>{currentTab?.icon} {currentTab?.label}</div>
           </div>
         </div>
       )}
@@ -871,7 +928,7 @@ export default function TASSConstruction() {
         {tab === "edi"         && <EDIModule />}
         {tab === "coach"       && <CoachModule />}
       </div>
-      <div style={{ position: "fixed", bottom: 0, left: 0, right: 0, background: "#111", borderTop: `2px solid ${AMBER}20`, display: "flex", justifyContent: "center", padding: "8px 2px 12px", gap: 1, zIndex: 100 }}>
+      <div style={{ position: "fixed", bottom: 0, left: 0, right: 0, background: "#fff", borderTop: "1px solid #E2E8F0", boxShadow: "0 -2px 12px rgba(0,0,0,0.06)", display: "flex", justifyContent: "center", padding: "8px 2px 12px", gap: 1, zIndex: 100 }}>
         {MODULES.map(m => (
           <button key={m.id} onClick={() => setTab(m.id)}
             style={{ flex: 1, maxWidth: 58, background: "none", border: "none", cursor: "pointer", padding: "5px 2px", display: "flex", flexDirection: "column", alignItems: "center", gap: 2 }}>
