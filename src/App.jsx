@@ -448,8 +448,8 @@ function CVModule() {
         <p style={{ color: "#444", fontSize: 13, lineHeight: 1.6, margin: 0 }}>📝 {s.prompt}</p>
       </Card>
       <div style={{ display: "flex", gap: 8, marginBottom: 12 }}>
-        <button onClick={() => setReveal(reveal === "weak" ? null : "weak")} style={{ flex: 1, padding: 10, background: reveal === "weak" ? RUST : "#1A1A1A", border: `2px solid ${RUST}`, color: reveal === "weak" ? "#fff" : RUST, borderRadius: 8, fontWeight: 700, fontSize: 12, cursor: "pointer", fontFamily: "inherit", textTransform: "uppercase" }}>{reveal === "weak" ? "Hide" : "✗ Weak"}</button>
-        <button onClick={() => setReveal(reveal === "strong" ? null : "strong")} style={{ flex: 1, padding: 10, background: reveal === "strong" ? GREEN : "#1A1A1A", border: `2px solid ${GREEN}`, color: reveal === "strong" ? "#fff" : GREEN, borderRadius: 8, fontWeight: 700, fontSize: 12, cursor: "pointer", fontFamily: "inherit", textTransform: "uppercase" }}>{reveal === "strong" ? "Hide" : "✓ Strong"}</button>
+        <button onClick={() => setReveal(reveal === "weak" ? null : "weak")} style={{ flex: 1, padding: 10, background: reveal === "weak" ? RUST : "#fff", border: `2px solid ${RUST}`, color: reveal === "weak" ? "#fff" : RUST, borderRadius: 8, fontWeight: 700, fontSize: 12, cursor: "pointer", fontFamily: "inherit", textTransform: "uppercase" }}>{reveal === "weak" ? "Hide" : "✗ Weak"}</button>
+        <button onClick={() => setReveal(reveal === "strong" ? null : "strong")} style={{ flex: 1, padding: 10, background: reveal === "strong" ? GREEN : "#fff", border: `2px solid ${GREEN}`, color: reveal === "strong" ? "#fff" : GREEN, borderRadius: 8, fontWeight: 700, fontSize: 12, cursor: "pointer", fontFamily: "inherit", textTransform: "uppercase" }}>{reveal === "strong" ? "Hide" : "✓ Strong"}</button>
       </div>
       {reveal === "weak" && <div style={{ background: "#FEF2F2", border: `1px solid ${RUST}30`, borderLeft: `3px solid ${RUST}`, borderRadius: 10, padding: 14, marginBottom: 12 }}><p style={{ color: RUST, fontWeight: 700, fontSize: 11, textTransform: "uppercase", margin: "0 0 8px" }}>✗ Weak — no evidence</p><pre style={{ color: "#444", fontSize: 13, whiteSpace: "pre-wrap", fontFamily: "inherit", margin: 0, lineHeight: 1.65 }}>{s.weak}</pre></div>}
       {reveal === "strong" && <div style={{ background: "#F0FDF4", border: `1px solid ${GREEN}30`, borderLeft: `3px solid ${GREEN}`, borderRadius: 10, padding: 14, marginBottom: 12 }}><p style={{ color: GREEN, fontWeight: 700, fontSize: 11, textTransform: "uppercase", margin: "0 0 8px" }}>✓ Strong — specific, evidenced</p><pre style={{ color: "#333", fontSize: 13, whiteSpace: "pre-wrap", fontFamily: "inherit", margin: 0, lineHeight: 1.65 }}>{s.strong}</pre></div>}
@@ -533,8 +533,8 @@ function InterviewModule() {
         </div>
       </Card>
       <div style={{ display: "flex", gap: 8, marginBottom: 12 }}>
-        <button onClick={() => setReveal(reveal === "strong" ? null : "strong")} style={{ flex: 1, padding: 10, background: reveal === "strong" ? GREEN : "#1A1A1A", border: `2px solid ${GREEN}`, color: reveal === "strong" ? "#fff" : GREEN, borderRadius: 8, fontWeight: 700, fontSize: 12, cursor: "pointer", fontFamily: "inherit", textTransform: "uppercase" }}>{reveal === "strong" ? "Hide" : "✓ Strong"}</button>
-        <button onClick={() => setReveal(reveal === "weak" ? null : "weak")} style={{ flex: 1, padding: 10, background: reveal === "weak" ? RUST : "#1A1A1A", border: `2px solid ${RUST}`, color: reveal === "weak" ? "#fff" : RUST, borderRadius: 8, fontWeight: 700, fontSize: 12, cursor: "pointer", fontFamily: "inherit", textTransform: "uppercase" }}>{reveal === "weak" ? "Hide" : "✗ Weak"}</button>
+        <button onClick={() => setReveal(reveal === "strong" ? null : "strong")} style={{ flex: 1, padding: 10, background: reveal === "strong" ? GREEN : "#fff", border: `2px solid ${GREEN}`, color: reveal === "strong" ? "#fff" : GREEN, borderRadius: 8, fontWeight: 700, fontSize: 12, cursor: "pointer", fontFamily: "inherit", textTransform: "uppercase" }}>{reveal === "strong" ? "Hide" : "✓ Strong"}</button>
+        <button onClick={() => setReveal(reveal === "weak" ? null : "weak")} style={{ flex: 1, padding: 10, background: reveal === "weak" ? RUST : "#fff", border: `2px solid ${RUST}`, color: reveal === "weak" ? "#fff" : RUST, borderRadius: 8, fontWeight: 700, fontSize: 12, cursor: "pointer", fontFamily: "inherit", textTransform: "uppercase" }}>{reveal === "weak" ? "Hide" : "✗ Weak"}</button>
       </div>
       {reveal === "strong" && <div style={{ background: "#F0FDF4", border: `1px solid ${GREEN}30`, borderLeft: `3px solid ${GREEN}`, borderRadius: 10, padding: 14, marginBottom: 12 }}><p style={{ color: GREEN, fontWeight: 700, fontSize: 11, textTransform: "uppercase", margin: "0 0 8px" }}>✓ Strong Answer</p><p style={{ color: "#333", fontSize: 14, lineHeight: 1.7, margin: 0 }}>{q.strong}</p></div>}
       {reveal === "weak" && <div style={{ background: "#FEF2F2", border: `1px solid ${RUST}30`, borderLeft: `3px solid ${RUST}`, borderRadius: 10, padding: 14, marginBottom: 12 }}><p style={{ color: RUST, fontWeight: 700, fontSize: 11, textTransform: "uppercase", margin: "0 0 8px" }}>✗ Weak Answer</p><p style={{ color: "#444", fontSize: 14, lineHeight: 1.7, margin: 0 }}>{q.weak}</p></div>}
@@ -871,10 +871,9 @@ function HomeModule({ setTab }) {
   ];
   return (
     <div>
-      <div style={{ display: "flex", justifyContent: "center", padding: "28px 0 24px" }}>
+      <div style={{ background: `linear-gradient(135deg, #0D1B3E 0%, #1A3060 100%)`, borderRadius: 14, padding: "32px 20px 28px", display: "flex", justifyContent: "center", marginBottom: 20 }}>
         <TASSLogo size="lg" theme="dark" />
       </div>
-      <div style={{ height: 8, background: `repeating-linear-gradient(45deg, ${AMBER}, ${AMBER} 10px, #E2E8F0 10px, #E2E8F0 20px)`, borderRadius: 4, marginBottom: 20 }} />
       <div style={{ background: "#fff", border: `1px solid ${AMBER}30`, borderLeft: `4px solid ${AMBER}`, borderRadius: 10, padding: 14, marginBottom: 16 }}>
         <p style={{ color: "#444", fontSize: 11, margin: "0 0 4px", textTransform: "uppercase", letterSpacing: 0.5, fontWeight: 700 }}>Construction and Trades</p>
         <p style={{ color: NAVY, fontSize: 14, lineHeight: 1.65, margin: 0 }}>A full-depth preparation module for construction trade apprenticeships in Scotland. Covers all 8 trades, CITB test prep, STAR method, CV building, technical questions and real candidate stories.</p>
