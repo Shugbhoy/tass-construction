@@ -811,17 +811,17 @@ function CoachModule() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          model: "claude-sonnet-4-5-20250929",
+          model: "claude-sonnet-4-20250514",
           max_tokens: 1000,
           system: `You are the TASS Construction Apprenticeship Coach — a direct, experienced careers coach helping young people (16–29) in Scotland secure construction and trade apprenticeships.\n\nYour approach:\n- Direct and practical, not vague or generic\n- Evidence-focused — push candidates for specific examples, not claims\n- Familiar with all 8 Scottish construction trades: carpentry, bricklaying, plumbing (SNIPEF), electrical (SELECT), plastering, painting, roofing, plant operations\n- Knowledgeable about CITB HS&E test (50 questions, 90% pass), Modern Apprenticeship frameworks, Apprenticeships.Scot, MyJobScotland\n- Safety culture is central — always reinforce that construction employers prioritise attitude to safety above almost everything else\n\nWhen running mock interviews:\n- Ask one question at a time\n- After each answer, give specific feedback: what worked, what to improve, then show an improved version\n- Construction employers care about: safety awareness, reliability, attitude to instruction, genuine motivation\n\nKey principles:\n- STAR method for all competency answers\n- I not we — always\n- Safety culture is not about ticking boxes, it is about protecting everyone on site\n- Research the employer — generic applications fail\n\nKeep responses focused and mobile-friendly.`,
           messages: newMsgs.map(m => ({ role: m.role, content: m.content }))
         })
       });
       const data = await res.json();
-      const reply = data.content?.[0]?.text || `Error: ${error.message || "Connection issue — please try again."}`;
+      const reply = data.content?.[0]?.text || "Connection issue — please try again.";
       setMessages([...newMsgs, { role: "assistant", content: reply }]);
     } catch {
-      setMessages([...newMsgs, { role: "assistant", content: `Error: ${error.message || "Connection issue — please try again."}` }]);
+      setMessages([...newMsgs, { role: "assistant", content: "Connection issue — please try again." }]);
     }
     setLoading(false);
   }
@@ -871,8 +871,13 @@ function HomeModule({ setTab }) {
   ];
   return (
     <div>
-      <div style={{ background: `linear-gradient(135deg, #0D1B3E 0%, #1A3060 100%)`, borderRadius: 14, padding: "32px 20px 28px", display: "flex", justifyContent: "center", marginBottom: 20 }}>
+      <div style={{ background: `linear-gradient(135deg, #0D1B3E 0%, #1A3060 100%)`, borderRadius: 14, padding: "32px 20px 20px", display: "flex", flexDirection: "column", alignItems: "center", gap: 12, marginBottom: 20 }}>
         <TASSLogo size="lg" theme="dark" />
+        <a href="https://theapprenticeshipsuccesssystem.co.uk"
+          style={{display:"flex",alignItems:"center",gap:6,textDecoration:"none",background:"rgba(255,255,255,0.1)",border:"1px solid rgba(255,255,255,0.2)",borderRadius:99,padding:"5px 14px"}}>
+          <span style={{fontSize:12}}>🏠</span>
+          <span style={{color:"rgba(255,255,255,0.8)",fontSize:11,fontWeight:700,letterSpacing:"0.05em"}}>All Modules</span>
+        </a>
       </div>
       <div style={{ background: "#fff", border: `1px solid ${AMBER}30`, borderLeft: `4px solid ${AMBER}`, borderRadius: 10, padding: 14, marginBottom: 16 }}>
         <p style={{ color: "#444", fontSize: 11, margin: "0 0 4px", textTransform: "uppercase", letterSpacing: 0.5, fontWeight: 700 }}>Construction and Trades</p>
@@ -915,6 +920,11 @@ export default function TASSConstruction() {
             <div style={{ color: NAVY, fontWeight: 700, fontSize: 12, lineHeight: 1, textTransform: "uppercase", letterSpacing: 0.5 }}>Construction and Trades</div>
             <div style={{ color: "#444", fontSize: 11, marginTop: 2 }}>{currentTab?.icon} {currentTab?.label}</div>
           </div>
+          <a href="https://theapprenticeshipsuccesssystem.co.uk" 
+            style={{display:"flex",flexDirection:"column",alignItems:"center",gap:2,textDecoration:"none",flexShrink:0,opacity:0.75,padding:"4px 6px",borderRadius:8,border:"1px solid rgba(255,255,255,0.15)"}}>
+            <span style={{fontSize:14}}>🏠</span>
+            <span style={{color:"rgba(255,255,255,0.8)",fontSize:8,fontWeight:700,textTransform:"uppercase",letterSpacing:0.5,whiteSpace:"nowrap"}}>All Modules</span>
+          </a>
         </div>
       )}
       <div style={{ maxWidth: 640, margin: "0 auto", padding: "20px 16px 110px" }}>
