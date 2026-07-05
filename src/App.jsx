@@ -920,8 +920,19 @@ export default function TASSConstruction() {
             <div style={{ color: NAVY, fontWeight: 700, fontSize: 12, lineHeight: 1, textTransform: "uppercase", letterSpacing: 0.5 }}>Construction and Trades</div>
             <div style={{ color: "#444", fontSize: 11, marginTop: 2 }}>{currentTab?.icon} {currentTab?.label}</div>
           </div>
-          <a href="https://theapprenticeshipsuccesssystem.co.uk" 
-            style={{display:"flex",flexDirection:"column",alignItems:"center",gap:2,textDecoration:"none",flexShrink:0,opacity:0.75,padding:"4px 6px",borderRadius:8,border:"1px solid rgba(255,255,255,0.15)"}}>
+          <button onClick={()=>setTab("home")} style={{
+            display:"flex",flexDirection:"column",alignItems:"center",gap:2,
+            background:"rgba(255,255,255,0.1)",border:"1px solid rgba(255,255,255,0.2)",
+            borderRadius:8,padding:"5px 10px",cursor:"pointer",flexShrink:0,fontFamily:"inherit",
+          }}>
+            <span style={{fontSize:14}}>⬅️</span>
+            <span style={{color:"rgba(255,255,255,0.8)",fontSize:8,fontWeight:700,textTransform:"uppercase",letterSpacing:0.5,whiteSpace:"nowrap"}}>Module</span>
+          </button>
+          <a href="https://theapprenticeshipsuccesssystem.co.uk" style={{
+            display:"flex",flexDirection:"column",alignItems:"center",gap:2,
+            textDecoration:"none",background:"rgba(255,255,255,0.1)",
+            border:"1px solid rgba(255,255,255,0.2)",borderRadius:8,padding:"5px 10px",flexShrink:0,
+          }}>
             <span style={{fontSize:14}}>🏠</span>
             <span style={{color:"rgba(255,255,255,0.8)",fontSize:8,fontWeight:700,textTransform:"uppercase",letterSpacing:0.5,whiteSpace:"nowrap"}}>All Modules</span>
           </a>
